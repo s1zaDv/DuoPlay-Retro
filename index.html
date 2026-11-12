@@ -95,13 +95,13 @@ h2{font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,4rem);line-height:1
 
   <div class="heroGrid">
     <div class="reveal">
-      <p class="lead">DuoPlay Retro é um console pessoal para jogos clássicos na sua TV box. Escaneie um QR code, escolha Jogador 1 ou 2 e jogue, sem instalar nada nos celulares.</p>
+      <p class="lead">DuoPlay Retro é um console pessoal para jogos clássicos na sua TV box. Use o celular como controle, escolha Jogador 1 ou 2 e jogue.</p>
       <div class="actions">
-        <button class="btn v" type="button" data-download>Baixar o app (APK)</button>
+        <button class="btn v" type="button" data-download="app">Baixar o app (APK)</button>
         <button class="btn p" type="button" id="jump">Jogar a demo</button>
       </div>
       <p class="status" role="status" aria-live="polite" data-status></p>
-      <p class="tag">Versão 0.2 experimental, ainda em testes.</p>
+      <p class="tag">Versão 0.7.0 para TV box ARM32.</p>
     </div>
     <div class="brut reveal" id="gl" aria-label="Objeto 3D: uma TV box e dois controles. Arraste para girar."><span>Arraste</span></div>
   </div>
@@ -161,8 +161,8 @@ h2{font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,4rem);line-height:1
 <section id="baixar"><div class="wrap">
   <div class="brut dl pop">
     <h2 data-split>Baixe o app</h2>
-    <p>Versão 0.2 experimental, só para aparelhos ARM32. O download abre no MediaFire. Para instalar, o Android pede para liberar a instalação de fontes desconhecidas.</p>
-    <button class="btn p" type="button" data-download>Baixar o app (APK)</button>
+    <p>Dois apps: um para a TV box e outro para o celular virar controle. Os downloads abrem no MediaFire. Para instalar, o Android pede para liberar a instalação de fontes desconhecidas.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:16px"><button class="btn p" type="button" data-download="app">DuoPlay Retro 0.7.0 · TV box (ARM32)</button><button class="btn" type="button" data-download="ctrl">DuoPlay Controle 2.0.0 · celular</button></div>
     <p class="status" role="status" aria-live="polite" data-status style="margin:14px 0 0"></p>
   </div>
 </div></section>
@@ -175,7 +175,10 @@ h2{font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,4rem);line-height:1
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // Configuração do botão de download: preencha quando o arquivo estiver definido.
-var DOWNLOAD = { url: "https://www.mediafire.com/file/qfq8hf3759ppg9g/DuoPlay_Retro_0.2_Experimental_ARM32.apk/file", filename: "DuoPlay_Retro_0.2_Experimental_ARM32.apk" };
+var DOWNLOADS = {
+  app: "https://www.mediafire.com/file/lrvbqsherunj0tx/DuoPlay_Retro_0.7.0_ARM32.apk/file",
+  ctrl: "https://www.mediafire.com/file/w8851yizvm5mpce/DuoPlay_Controle_2.0.0.apk/file"
+};
 
 (function () {
   var G = window.gsap, T = window.THREE, root = document.documentElement;
@@ -189,8 +192,8 @@ var DOWNLOAD = { url: "https://www.mediafire.com/file/qfq8hf3759ppg9g/DuoPlay_Re
   function say(m) { sts.forEach(function (s) { s.textContent = m; }); }
   $$("[data-download]").forEach(function (b) {
     b.addEventListener("click", function () {
-      if (!DOWNLOAD.url) { say("O download ainda não está disponível."); return; }
-      var a = document.createElement("a"); a.href = DOWNLOAD.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      var url = DOWNLOADS[b.dataset.download]; if (!url) { say("O download ainda não está disponível."); return; }
+      var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
       document.body.appendChild(a); a.click(); a.remove(); say("Abrindo a página de download do APK.");
     });
   });
@@ -285,67 +288,4 @@ var DOWNLOAD = { url: "https://www.mediafire.com/file/qfq8hf3759ppg9g/DuoPlay_Re
     var drag = 0, lx = 0, target = .5;
     host.addEventListener("pointerdown", function (e) { drag = 1; lx = e.clientX; });
     addEventListener("pointerup", function () { drag = 0; });
-    addEventListener("pointermove", function (e) { if (drag) { target += (e.clientX - lx) * .01; lx = e.clientX; if (RM) draw(); } });
-    var tt = 0;
-    var draw = function () {
-      tt += .016; if (!drag && !RM) target += .006;
-      grp.rotation.y += (target - grp.rotation.y) * .08; grp.rotation.x = .12;
-      p1.position.y = -1.35 + Math.sin(tt * 2) * .08; p2.position.y = -1.35 + Math.cos(tt * 2) * .08;
-      ball.position.x = Math.sin(tt * 2.4) * .9; ball.rotation.y = tt;
-      ren.render(sc, cam);
-    };
-    var loop = function () { draw(); requestAnimationFrame(loop); };
-    if (RM) draw(); else loop();
-    gl = { paint: paint };
-  }
-
-  /* Tema */
-  $("#theme").addEventListener("click", function () {
-    var dark = root.dataset.theme === "dark";
-    root.dataset.theme = dark ? "light" : "dark"; rc(); if (gl) gl.paint();
-  });
-
-  /* GSAP: entrada, scroll, marquee, contadores */
-  if (!G || RM) return;
-  G.registerPlugin(ScrollTrigger);
-  G.from("h1 .c", { yPercent: 115, rotate: 5, duration: .9, ease: "power4.out", stagger: .03 });
-  G.from(".reveal", { y: 30, opacity: 0, duration: .8, ease: "power3.out", delay: .7, stagger: .12 });
-  G.from(".logo", { y: -20, opacity: 0, duration: .6, ease: "power3.out" });
-
-  $$("h2 .c").length && $$("h2[aria-label]").forEach(function (h) {
-    G.from(h.querySelectorAll(".c"), { yPercent: 115, duration: .7, ease: "power4.out", stagger: .02, scrollTrigger: { trigger: h, start: "top 88%", once: true } });
-  });
-  G.set(".pop", { opacity: 0, y: 40 });
-  ScrollTrigger.batch(".pop", { start: "top 90%", once: true, onEnter: function (b) { G.to(b, { opacity: 1, y: 0, duration: .7, ease: "power3.out", stagger: .1 }); } });
-
-  var tw = [G.to("#m1", { xPercent: -50, duration: 34, ease: "none", repeat: -1 }), G.fromTo("#m2", { xPercent: -50 }, { xPercent: 0, duration: 34, ease: "none", repeat: -1 })];
-  var boost = 0, sk = 0;
-  ScrollTrigger.create({ onUpdate: function (s) { boost = Math.min(Math.abs(s.getVelocity()) / 500, 6); sk = -s.getVelocity() / 260; } });
-  G.ticker.add(function () { boost *= .93; sk *= .9; tw.forEach(function (t) { t.timeScale(1 + boost); }); G.set(".mqs", { skewX: clamp(sk, -7, 7) }); });
-
-  $$("[data-count]").forEach(function (el) {
-    var n = +el.dataset.count, o = { v: 0 }; if (!n) return; el.textContent = "0";
-    ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: function () {
-      G.to(o, { v: n, duration: 1.6, ease: "power2.out", onUpdate: function () { el.textContent = Math.round(o.v).toLocaleString("pt-BR"); } });
-    } });
-  });
-  G.fromTo(".big", { xPercent: 8 }, { xPercent: -45, ease: "none", scrollTrigger: { trigger: ".foot", start: "top bottom", end: "bottom bottom", scrub: .6 } });
-
-  /* Letras do título reagem ao ponteiro (só com mouse) */
-  if (matchMedia("(hover:hover)").matches) {
-    var chars = $$("h1 .c"), busy = 0;
-    addEventListener("pointermove", function (e) {
-      if (busy) return; busy = 1;
-      requestAnimationFrame(function () {
-        busy = 0;
-        chars.forEach(function (c) {
-          var r = c.getBoundingClientRect(), d = Math.hypot(e.clientX - r.left - r.width / 2, e.clientY - r.top - r.height / 2), k = Math.max(0, 1 - d / 130);
-          c.style.translate = "0 " + -k * 12 + "px"; c.style.scale = String(1 + k * .2);
-        });
-      });
-    });
-  }
-})();
-</script>
-</body>
-</html>
+    addEventListener("pointermove", function (e) { if (drag) { target += (e.clientX - lx) * .01; lx = e.cl
