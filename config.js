@@ -99,6 +99,6 @@ var SITE = {
 
 /* ---- Downloads (MediaFire) ---- */
 var DOWNLOADS = {
-  app: "https://www.mediafire.com/file/lrvbqsherunj0tx/DuoPlay_Retro_0.7.0_ARM32.apk/file",
+  app: "https://www.mediafire.com/file/vlde2plv01d46fo/DuoPlay_Retro_0.7.9_ARM32.apk/file",
   ctrl: "https://www.mediafire.com/file/w8851yizvm5mpce/DuoPlay_Controle_2.0.0.apk/file"
 };
