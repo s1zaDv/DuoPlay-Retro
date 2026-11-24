@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Documentos · DuoPlay Retro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF7F3;--paper:#FFFFFF;--ink:#0A1A17;--violet:#2FD07A;--blue:#4DB0FF;--soft:#CDEFE0;--mute:#3F5F55;--on:#0A1A17;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 1.0625rem/1.6 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 56px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-weight:800;font-stretch:75%;font-size:1.35rem;letter-spacing:-.02em;padding:4px 12px;background:var(--violet);color:var(--on);border:3px solid var(--ink);transform:rotate(-2deg);text-decoration:none}
+.nl{color:var(--ink);font-weight:700;padding:8px 6px}
+a:focus-visible,button:focus-visible{outline:4px solid var(--violet);outline-offset:3px}
+.docs{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 28px}
+.docs a{font-weight:800;color:var(--on);background:var(--blue);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:9px 14px;min-height:44px;text-decoration:none}
+.docs a[aria-current="page"]{background:var(--violet)}
+.brut{background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:clamp(20px,4vw,40px)}
+h1{margin:0 0 6px;font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,3.4rem);line-height:1;text-transform:uppercase;letter-spacing:-.02em}
+h2{margin:26px 0 6px;font-size:1.2rem}
+p{margin:0}.gap{margin-top:8px}ul{margin:8px 0 0;padding-left:22px;display:grid;gap:6px}.meta{color:var(--mute);margin-bottom:8px}
+p,li,h1,h2{overflow-wrap:anywhere}.wrap>*{min-width:0}@media (max-width:520px){.docs a{width:100%}}
+.note{margin-top:24px;padding:12px 16px;background:var(--soft);border:3px dashed var(--ink);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="index.html">DuoPlay Retro</a><a class="nl" href="index.html">Voltar ao site</a></div>
+  <nav class="docs" id="docs" aria-label="Documentos"></nav>
+  <main><article class="brut" id="doc" tabindex="-1"></article>
+  <p class="note">Modelo preparado para revisão jurídica. Trechos entre colchetes ainda precisam ser definidos antes da publicação oficial.</p></main>
+</div>
+<script src="config.js"></script>
+<script>
+/* Textos dos documentos: edite aqui. {org} vira o nome da empresa definido em config.js. */
+var LEGAL = {
+  termos: { t: "Termos de Uso", s: [
+    ["Apresentação do DuoPlay", "O DuoPlay Retro e o DuoPlay Controle (em conjunto, “DuoPlay”) são aplicativos para Android e Android TV oferecidos por {org}, inscrita sob o nº {doc}, com sede em {address}. O DuoPlay permite jogar títulos clássicos de videogame usando o celular como controle.\nEstes Termos regulam o uso do site, dos aplicativos e das assinaturas. Leia-os junto com a Política de Privacidade, a Política de Cancelamento, a Política de Reembolso, as Regras da Comunidade e o documento de Propriedade Intelectual e Responsabilidade do Usuário."],
+    ["Aceitação dos termos", "Ao baixar, instalar, assinar ou usar o DuoPlay, você declara que leu, entendeu e concorda com estes Termos. Se não concordar, não use o serviço.\nAs informações sobre planos, valores e condições são apresentadas antes da contratação. A versão em vigor é a publicada no site, com a data de atualização."],
+    ["Requisitos de utilização", "Para contratar, você precisa ter capacidade civil. Menores de 18 anos só podem usar o DuoPlay com autorização e acompanhamento de um responsável, que responde pela contratação.\nO aparelho deve atender aos requisitos da seção Compatibilidade.\nBaixe os aplicativos somente pelos links oficiais do site. Arquivos obtidos em outros lugares podem ter sido alterados, e não nos responsabilizamos por eles.\nComo a instalação é feita fora de uma loja de aplicativos, o Android pede que você libere a instalação de fontes desconhecidas. Faça isso apenas para o arquivo baixado do site oficial."],
+    ["Licença de uso", "Concedemos a você uma licença pessoal, limitada, não exclusiva e não transferível para usar o DuoPlay em seus aparelhos, durante o período contratado, sem fins comerciais, nos termos da Lei do Software (Lei 9.609/1998).\nO DuoPlay é licenciado, não vendido. Os direitos não concedidos expressamente ficam reservados. Você não pode vender, alugar, sublicenciar, redistribuir, compartilhar seu acesso com terceiros, extrair código nem criar obras derivadas, exceto quando a lei permitir expressamente."],
+    ["Assinaturas e pagamentos", "Antes da contratação mostramos o plano, a duração, o valor total cobrado, a forma de cobrança e as condições de renovação e cancelamento. Forma de cobrança e renovação: [DEFINIR_FORMA_DE_COBRANCA_E_RENOVACAO].\nPagamentos são processados por [DEFINIR_PROCESSADOR_DE_PAGAMENTO]. Tratamento dos dados de pagamento: [CONFIRMAR_COMO_OS_DADOS_DE_PAGAMENTO_SAO_TRATADOS].\nO valor de um ciclo já contratado não muda durante o ciclo. Reajustes valem apenas para ciclos futuros e serão informados com antecedência de [DEFINIR_PRAZO], com a opção de cancelar antes da renovação.\nCancelamento e reembolso seguem as respectivas Políticas."],
+    ["Atualizações e disponibilidade", "Durante o plano, você tem direito às atualizações e versões disponibilizadas aos assinantes, conforme as condições do serviço. Não garantimos prazo, frequência ou conteúdo de versões futuras.\nAlgumas versões podem ser identificadas como experimentais ou de teste. Elas podem apresentar falhas e são oferecidas com essa ressalva, sem prejuízo dos direitos do consumidor.\nPodem ocorrer manutenções e instabilidades, informadas na seção Status do Serviço quando possível. O funcionamento também depende de fatores fora do nosso controle, como o aparelho, o Android e a sua rede."],
+    ["Condutas proibidas", "É proibido:\n- usar o DuoPlay para violar leis ou direitos de terceiros, incluindo direitos autorais;\n- distribuir, vender ou hospedar jogos, ROMs, ISOs, BIOS ou outros arquivos protegidos;\n- compartilhar, revender ou publicar o acesso do seu plano;\n- burlar limitações técnicas, controles de acesso ou a cobrança;\n- tentar acessar sistemas ou dados que não são seus;\n- divulgar versões alteradas do DuoPlay ou arquivos com código malicioso;\n- assediar ou prejudicar outros usuários.\nAs Regras da Comunidade também se aplicam."],
+    ["Suspensão e encerramento de acesso", "Podemos suspender ou encerrar o acesso, total ou parcialmente, em caso de violação destes Termos, fraude, uso ilícito ou ordem de autoridade. Sempre que possível, informamos o motivo e damos a você a chance de se manifestar, exceto em situações urgentes ou de segurança.\nSe o encerramento ocorrer sem culpa sua, você tem direito à devolução proporcional do período pago e não utilizado, conforme a Política de Reembolso."],
+    ["Limitação de responsabilidade", "Respondemos pelos danos que a lei nos atribuir, inclusive os previstos no Código de Defesa do Consumidor. Nada nestes Termos exclui ou reduz direitos do consumidor garantidos em lei.\nDentro do que a lei permite, não respondemos por:\n- arquivos, jogos e conteúdos que você escolher usar com o DuoPlay;\n- uso do serviço em desacordo com estes Termos;\n- falhas causadas por aparelhos fora dos requisitos, alterações no sistema do aparelho, aplicativos de terceiros, rede ou energia;\n- perda de dados salvos decorrente de ação ou omissão sua, como não manter cópia de segurança.\nRecomendamos manter cópia de segurança dos seus arquivos e progressos."],
+    ["Alterações dos termos", "Podemos atualizar estes Termos para refletir mudanças no serviço ou na lei. Mudanças relevantes serão informadas no site, com data de vigência e antecedência de [DEFINIR_PRAZO].\nAs alterações não afetam o período e o preço já contratados. Se não concordar com a nova versão, você pode cancelar conforme a Política de Cancelamento."],
+    ["Legislação aplicável", "Estes Termos seguem as leis do Brasil. Para consumidores, é competente o foro do domicílio do consumidor (art. 101, I, do Código de Defesa do Consumidor). Para as demais pessoas, o foro de {foro}.\nAntes de qualquer medida judicial, convidamos você a nos procurar pelo contato abaixo para tentarmos resolver de forma amigável. Isso não limita seu acesso à Justiça nem aos órgãos de defesa do consumidor."],
+    ["Contato", "{org}. E-mail: {email}. Prazo e horário de atendimento: [DEFINIR_PRAZO_E_HORARIO_DE_ATENDIMENTO]."]
+  ]},
+  privacidade: { t: "Política de Privacidade", s: [
+    ["Introdução", "Esta Política explica como {org} trata dados pessoais no site e nos aplicativos do DuoPlay, conforme a Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018). Tratamos apenas os dados necessários, com base em uma hipótese legal.\nEncarregado pelo tratamento de dados: {dpo}."],
+    ["Dados coletados", "Coletamos só o que é necessário para cada finalidade:\n- Dados enviados nos formulários: nome ou apelido (opcional), e-mail ou contato, mensagem e, nos relatos de bug, versão do DuoPlay, modelo do dispositivo, versão do Android e etapas para reproduzir o erro.\n- Quando as assinaturas abrirem: e-mail, plano, vigência e situação da assinatura. Dados de pagamento são tratados pelo processador de pagamento: [CONFIRMAR_QUAIS_DADOS_CHEGAM_ATE_NOS].\n- Dados técnicos e de segurança: [CONFIRMAR_SE_HA_REGISTROS_DE_ACESSO_E_DIAGNOSTICO].\n- Dados dos aplicativos: [CONFIRMAR_DADOS_COLETADOS_PELOS_APLICATIVOS].\nNão pedimos dados pessoais sensíveis. Pedimos que você também não os inclua em mensagens."],
+    ["Finalidades do tratamento", "- Responder solicitações e prestar suporte (execução de contrato ou procedimentos preliminares; legítimo interesse).\n- Processar assinaturas e cobranças (execução de contrato).\n- Cumprir obrigações legais e fiscais (obrigação legal).\n- Corrigir falhas e melhorar a estabilidade (legítimo interesse).\n- Prevenir fraudes e abusos (legítimo interesse).\n- Exercer direitos em processos judiciais, administrativos ou arbitrais (exercício regular de direitos).\nNão usamos seus dados para finalidades incompatíveis com essas."],
+    ["Compartilhamento de dados", "Não vendemos dados pessoais. Compartilhamos apenas o necessário com provedores que nos ajudam a operar: hospedagem do site, recebimento de formulários, processamento de pagamento e envio de e-mails ([LISTAR_OPERADORES_E_PAISES]). Também podemos compartilhar por obrigação legal, ordem de autoridade ou para exercer direitos em processos.\nSe algum provedor estiver fora do Brasil, a transferência internacional seguirá a LGPD: [CONFIRMAR]."],
+    ["Armazenamento", "[DEFINIR_ONDE_E_EM_QUAL_SERVICO_OS_DADOS_FICAM_ARMAZENADOS].\nDenúncias não são publicadas. O acesso a elas deve ser restrito a quem precisa analisá-las: [CONFIRMAR_CONTROLE_DE_ACESSO]."],
+    ["Segurança", "Adotamos medidas técnicas e administrativas razoáveis para proteger os dados contra acesso não autorizado, perda e alteração, e limitamos o acesso a quem precisa. Medidas efetivamente adotadas: [LISTAR_APENAS_O_QUE_ESTA_IMPLEMENTADO].\nNenhum sistema é totalmente imune a incidentes. Em caso de incidente que possa causar risco ou dano relevante, comunicaremos você e a Autoridade Nacional de Proteção de Dados (ANPD), nos termos da LGPD.\nProteja também o seu lado: não compartilhe seu acesso e use apenas os links oficiais."],
+    ["Direitos dos titulares", "Você pode, mediante pedido: confirmar se tratamos seus dados; acessá-los; corrigi-los; pedir anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade; pedir portabilidade; saber com quem compartilhamos; ser informado sobre a possibilidade de não consentir e suas consequências; revogar o consentimento; e pedir revisão de decisões automatizadas, se houver (arts. 18 e 20 da LGPD).\nPara exercer seus direitos, escreva para {privacy}. Respondemos em até [DEFINIR_PRAZO] e podemos pedir informações para confirmar sua identidade. Você também pode reclamar à ANPD."],
+    ["Cookies", "[DEFINIR_SE_O_SITE_USA_COOKIES_OU_FERRAMENTAS_DE_MEDICAO].\nSe passarmos a usar cookies ou medição de uso além dos estritamente necessários, pediremos seu consentimento e atualizaremos esta Política antes."],
+    ["Dados de menores", "O serviço não é direcionado a crianças (menores de 12 anos). Dados de crianças só são tratados com consentimento específico e em destaque de um responsável, e os de adolescentes são tratados no seu melhor interesse (art. 14 da LGPD).\nSe você acredita que um menor nos enviou dados sem autorização, escreva para {privacy} e eliminaremos os dados."],
+    ["Retenção e eliminação", "Guardamos os dados pelo tempo necessário às finalidades desta Política, ao cumprimento de obrigações legais ([CONFIRMAR_PRAZOS_LEGAIS_APLICAVEIS]) e ao exercício regular de direitos. Prazos por tipo de dado: [DEFINIR_PRAZOS]. Depois, eliminamos ou anonimizamos."],
+    ["Contato sobre privacidade", "Privacidade: {privacy}. Encarregado: {dpo}.\nAlterações desta Política serão publicadas aqui, com a data de atualização."]
+  ]},
+  cancelamento: { t: "Política de Cancelamento", s: [
+    ["Como cancelar", "Você pode pedir o cancelamento a qualquer momento, pelo mesmo meio usado para contratar ou pelo assunto Cancelamento na página de Contato ({email}). [CONFIRMAR_SE_HA_CANCELAMENTO_DIRETO_NO_PAINEL]\nNão exigimos justificativa nem etapas desnecessárias para cancelar."],
+    ["Cancelamento da renovação", "[DEFINIR_SE_HA_RENOVACAO_AUTOMATICA].\nHavendo renovação automática, cancelar a renovação impede cobranças futuras, e o plano já pago continua ativo até o fim do período contratado. Para não ser cobrado na renovação seguinte, peça o cancelamento com antecedência mínima de [DEFINIR_ANTECEDENCIA] antes da data de renovação.\nCancelar a renovação não é pedir reembolso. Os pedidos são diferentes."],
+    ["Acesso após cancelamento", "Nos planos pré-pagos, o acesso e as atualizações continuam até o fim do período já pago. Depois disso, o acesso às versões e aos recursos disponibilizados a assinantes é encerrado: [CONFIRMAR_O_QUE_CONTINUA_FUNCIONANDO_NA_VERSAO_JA_INSTALADA].\nSeus dados seguem a Política de Privacidade."],
+    ["Cancelamento pelo DuoPlay", "Podemos encerrar um plano ou o serviço com aviso prévio de [DEFINIR_PRAZO], enviado por [DEFINIR_CANAL]. Nesse caso, devolvemos o valor proporcional ao período pago e não usufruído, conforme a Política de Reembolso."],
+    ["Hipóteses de suspensão", "Podemos suspender o acesso em caso de fraude ou contestação de pagamento de má-fé, violação dos Termos de Uso (em especial distribuição de arquivos protegidos ou compartilhamento do acesso), ordem de autoridade ou risco à segurança do serviço ou de outros usuários. Sempre que possível, informamos o motivo."],
+    ["Procedimento", "1. Envie o pedido informando o e-mail do cadastro e o plano.\n2. Confirmamos o recebimento por escrito.\n3. Informamos a data em que o cancelamento passa a valer e a situação do seu acesso.\nGuarde a confirmação como comprovante."],
+    ["Prazo de processamento", "O cancelamento é registrado em até [DEFINIR_PRAZO] e vale, para cobranças futuras, a partir da data do pedido. Se houver cobrança depois de um pedido regular, ela será devolvida conforme a Política de Reembolso."],
+    ["Contato", "{email}."]
+  ]},
+  reembolso: { t: "Política de Reembolso", s: [
+    ["Direito de arrependimento", "Se você contratou pela internet, pode desistir em até 7 dias corridos, contados da contratação ou do recebimento do serviço, sem precisar justificar. Devolvemos todos os valores pagos, atualizados quando aplicável, nos termos do art. 49 do Código de Defesa do Consumidor e do Decreto 7.962/2013.\nO pedido pode ser feito pelo mesmo meio usado na contratação ou pelo contato abaixo."],
+    ["Solicitação de reembolso", "Use o assunto Assinaturas e pagamentos na página de Contato, informando e-mail do cadastro, plano e data da contratação.\nCancelar a renovação não é o mesmo que pedir reembolso. Você pode fazer os dois pedidos."],
+    ["Situações elegíveis", "- Desistência dentro de 7 dias da contratação.\n- Cobrança indevida ou sem contratação.\n- Cobrança em duplicidade.\n- Cobrança depois de cancelamento regular.\n- Serviço não prestado, ou prestado de forma diferente da oferecida, e não corrigido em prazo razoável.\n- Encerramento do serviço por nossa iniciativa, sem culpa sua (valor proporcional)."],
+    ["Cobranças indevidas", "Cobranças sem contratação ou após cancelamento regular são devolvidas na forma do art. 42, parágrafo único, do Código de Defesa do Consumidor, quando aplicável. Se você não reconhecer uma cobrança, avise-nos o quanto antes para investigarmos e resolvermos sem que seja preciso contestá-la no banco."],
+    ["Cobranças duplicadas", "Cobranças duplicadas são estornadas integralmente após a confirmação."],
+    ["Problemas na prestação do serviço", "Se o serviço contratado não funcionar como informado, você pode pedir correção, abatimento proporcional do preço ou devolução, nos termos do art. 20 do Código de Defesa do Consumidor. Podemos pedir informações técnicas, como versão do DuoPlay e modelo do aparelho, para tentar resolver.\nSituações já informadas na seção Compatibilidade serão analisadas caso a caso, sem excluir direitos do consumidor."],
+    ["Processamento", "O reembolso é feito, sempre que possível, pelo mesmo meio de pagamento da compra. No cartão, o estorno aparece conforme o calendário da operadora. Em outros meios: [DEFINIR_FORMA_DE_DEVOLUCAO]."],
+    ["Prazos", "Respondemos ao pedido em até [DEFINIR_PRAZO_DE_RESPOSTA] e iniciamos a devolução em até [DEFINIR_PRAZO_DE_DEVOLUCAO] após a aprovação."],
+    ["Contato", "{email}."]
+  ]},
+  comunidade: { t: "Regras da Comunidade", s: [
+    ["Respeito entre os membros", "A comunidade existe para ajudar quem usa o DuoPlay. Trate todos com respeito e boa-fé. Divergir é normal; ofender não."],
+    ["Proibição de assédio", "É proibido perseguir, ameaçar, intimidar, humilhar, expor dados pessoais de terceiros ou insistir em contato indesejado."],
+    ["Proibição de discriminação", "É proibido discriminar ou incitar ódio por raça, cor, etnia, origem, religião, gênero, orientação sexual, deficiência, idade ou qualquer outra característica."],
+    ["Conteúdo permitido", "Dúvidas, relatos de problemas, sugestões, resultados de testes no seu aparelho e conversa sobre o DuoPlay e jogos, de forma respeitosa e dentro da lei. Não publique dados pessoais seus ou de outras pessoas, nem informações de pagamento."],
+    ["Propriedade intelectual", "Não compartilhe, peça, ofereça nem indique onde obter jogos, ROMs, ISOs, BIOS, chaves ou outros arquivos protegidos sem autorização. Não divulgue versões alteradas, quebradas ou não oficiais do DuoPlay. Esse tipo de conteúdo será removido."],
+    ["Proibição de spam", "Sem propaganda não autorizada, mensagens repetidas, correntes ou divulgação em massa."],
+    ["Proibição de golpes e links maliciosos", "Não publique links suspeitos, tentativas de fraude nem pedidos de dados pessoais, senhas ou pagamentos fora dos canais oficiais. A equipe nunca pede sua senha."],
+    ["Denúncias", "Use o canal Denúncias da Central da Comunidade. As denúncias são privadas: não são publicadas e a identidade de quem denuncia não é divulgada ao denunciado, salvo obrigação legal. Denúncias falsas ou de má-fé também violam estas regras."],
+    ["Moderação", "A moderação pode remover conteúdo, advertir, restringir acesso ou suspender membros, conforme a gravidade, a reincidência e o contexto, de forma proporcional. A moderação não monitora todo o conteúdo e não responde por mensagens de terceiros, mas age quando toma conhecimento de uma violação."],
+    ["Advertências e suspensões", "Em geral: advertência, restrição temporária e, na reincidência, suspensão. Casos graves, como ameaça, fraude, distribuição de arquivos protegidos ou conteúdo ilegal, podem levar à remoção e suspensão imediatas, e podem ser comunicados às autoridades.\nPara contestar uma medida, escreva para {email} em até [DEFINIR_PRAZO]."],
+    ["Regras complementares do Discord", "O servidor do Discord ainda está em preparação. Quando abrir, as regras complementares serão publicadas aqui, junto às diretrizes do próprio Discord."]
+  ]},
+  propriedade: { t: "Propriedade Intelectual e Responsabilidade do Usuário", s: [
+    ["Propriedade intelectual do DuoPlay", "O DuoPlay (aplicativos, site, textos, interface e demais materiais), a marca e o logotipo pertencem a {org} ou são usados com autorização, e são protegidos pela Lei do Software (9.609/1998), pela Lei de Direitos Autorais (9.610/1998), pela Lei de Propriedade Industrial (9.279/1996) e demais normas."],
+    ["Direitos sobre software, marca e identidade visual", "O uso do DuoPlay não transfere nenhum desses direitos. Sem autorização por escrito, você não pode copiar, modificar, redistribuir ou usar a marca, o nome, o logotipo ou o visual do DuoPlay de forma que cause confusão."],
+    ["Conteúdos de terceiros", "Jogos, consoles, personagens, nomes e marcas citados pertencem aos seus titulares e aparecem apenas para identificar compatibilidade. A citação não indica parceria, apoio ou aprovação."],
+    ["Arquivos fornecidos pelo usuário", "O DuoPlay não inclui, não fornece, não vende e não hospeda jogos, ROMs, ISOs, BIOS ou outros arquivos protegidos de terceiros sem autorização. Os arquivos que você usar com o DuoPlay são escolha sua, ficam no seu aparelho e são de sua responsabilidade."],
+    ["Responsabilidade pela utilização", "Você responde, perante a lei, pelo uso que faz do DuoPlay e pelos arquivos que utiliza, inclusive pelos prejuízos que causar a terceiros ou a nós por uso ilícito, na forma da lei."],
+    ["Respeito aos direitos autorais", "Use apenas conteúdos que você tem o direito de usar, nos limites da legislação brasileira de direitos autorais e das licenças aplicáveis. Em caso de dúvida sobre a legalidade de um arquivo, não o utilize e busque orientação jurídica."],
+    ["Proibição de distribuição indevida", "É proibido distribuir, vender, compartilhar, hospedar ou indicar jogos e arquivos protegidos por meio do DuoPlay, do site ou da comunidade.\nSe você é titular de direitos e acredita que algum conteúdo no site ou na comunidade viola seus direitos, escreva para {ip} com: identificação do titular ou representante; descrição da obra; indicação de onde está o conteúdo; seus dados de contato; e declaração de boa-fé de que o uso não é autorizado. Analisaremos e, se for o caso, removeremos o conteúdo. Notificações sabidamente falsas podem gerar responsabilidade."],
+    ["Independência de marcas de terceiros", "O DuoPlay é um projeto independente. Não há afiliação, parceria, patrocínio ou aprovação de fabricantes de consoles, editoras ou de outras marcas citadas."],
+    ["Limitações de compatibilidade", "Nem todo aparelho ou título funciona da mesma forma. O desempenho depende do hardware, do Android e do arquivo utilizado. A seção Compatibilidade informa apenas o que foi testado, sem garantir resultado em aparelhos ou títulos não listados."],
+    ["Responsabilidade por conteúdos e materiais utilizados", "A responsabilidade por conteúdos e materiais usados com o DuoPlay é de quem os utiliza. Podemos remover conteúdo, suspender contas e comunicar autoridades quando houver indício de violação. Isso não afasta responsabilidades que a lei atribua ao DuoPlay nem direitos do consumidor."]
+  ]}
+};
+(function () {
+  var keys = Object.keys(LEGAL), nav = document.getElementById("docs"), doc = document.getElementById("doc");
+  keys.forEach(function (k) {
+    var a = document.createElement("a"); a.href = "#" + k; a.textContent = LEGAL[k].t; a.dataset.k = k; nav.appendChild(a);
+  });
+  function el(tag, text, cls) { var e = document.createElement(tag); e.textContent = text; if (cls) e.className = cls; return e; }
+  var tk = { org: SITE.org.name, doc: SITE.org.doc, address: SITE.org.address, email: SITE.org.email, privacy: SITE.org.privacyEmail, ip: SITE.org.ipEmail, dpo: SITE.org.dpo, foro: SITE.org.foro };
+  function show() {
+    var k = location.hash.slice(1); if (!LEGAL[k]) k = "termos";
+    var d = LEGAL[k]; doc.textContent = "";
+    doc.appendChild(el("h1", d.t));
+    doc.appendChild(el("p", "Última atualização: " + SITE.legalUpdated, "meta"));
+    d.s.forEach(function (s, i) {
+      doc.appendChild(el("h2", (i + 1) + ". " + s[0]));
+      var buf = null;
+      s[1].replace(/\{(\w+)\}/g, function (m, k) { return tk[k] || m; }).split("\n").forEach(function (ln) {
+        if (ln.indexOf("- ") === 0) { if (!buf) { buf = document.createElement("ul"); doc.appendChild(buf); } buf.appendChild(el("li", ln.slice(2))); }
+        else { buf = null; doc.appendChild(el("p", ln, "gap")); }
+      });
+    });
+    Array.prototype.forEach.call(nav.children, function (a) { if (a.dataset.k === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    document.title = d.t + " · DuoPlay Retro";
+    window.scrollTo(0, 0);
+  }
+  addEventListener("hashchange", show); show();
+})();
+</script>
+</body>
+</html>
