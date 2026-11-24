@@ -7,16 +7,11 @@
 var SITE = {
   version: "0.7.0",                      // versão exibida no site
   org: {
-    name: "[DEFINIR_RAZAO_SOCIAL]",
-    doc: "[DEFINIR_CNPJ_OU_CPF]",
-    address: "[DEFINIR_ENDERECO]",
-    email: "[DEFINIR_EMAIL_DE_CONTATO]",
-    privacyEmail: "[DEFINIR_EMAIL_DE_PRIVACIDADE]",
-    ipEmail: "[DEFINIR_EMAIL_PARA_NOTIFICACAO_DE_DIREITOS_AUTORAIS]",
-    dpo: "[DEFINIR_ENCARREGADO_LGPD]",
-    foro: "[DEFINIR_FORO]"
+    name: "responsáveis pelo projeto DuoPlay",
+    responsible: "s1za",
+    foro: "Comarca de Aracaju/SE"
   }, // aparece nos documentos legais
-  legalUpdated: "[DEFINIR_DATA_DA_ULTIMA_ATUALIZACAO]",
+  legalUpdated: "24 de novembro de 2026",
   DISCORD_INVITE_URL: null,              // cole o convite quando o servidor abrir; null = "Em breve"
   formAction: "/",                       // Netlify Forms: mantenha "/"; null desliga o envio
 
@@ -35,11 +30,11 @@ var SITE = {
     { id: "12m", name: "Anual",      months: 12, price: 149.99, checkout: null }
   ],
   billing: [                             // [rótulo, texto, link opcional]
-    ["Forma de cobrança", "[DEFINIR_FORMA_DE_COBRANCA]", null],
-    ["Renovação automática", "[DEFINIR_SE_HA_RENOVACAO_AUTOMATICA]", null],
+    ["Forma de pagamento", "Pix, cartão de crédito, cartão de débito e boleto, via Mercado Pago", null],
+    ["Renovação automática", "Não há: os planos são pré-pagos, por período determinado", null],
     ["Cancelamento", "Política de Cancelamento", "legal.html#cancelamento"],
     ["Reembolso", "Política de Reembolso", "legal.html#reembolso"],
-    ["Acesso após cancelamento", "[DEFINIR_CONDICOES_DE_ACESSO_APOS_CANCELAMENTO]", null]
+    ["Acesso após cancelamento", "A versão instalada continua funcionando offline, sem novas atualizações", null]
   ],
 
   /* ---- Comunidade e contato ---- */
@@ -50,10 +45,10 @@ var SITE = {
     { id: "sugestao", label: "Sugestões",     hint: "Ideias e melhorias do ponto de vista de quem usa. Não há promessa de implementação.", ph: "Qual é a sua ideia?" }
   ],
   channels: [                            // url: "mailto:..." ou link; null = "canal em preparação"
-    { label: "E-mail de suporte", url: null, text: null },
+    { label: "Formulário de contato", url: "#contato", text: "Enviar mensagem nesta página" },   // quando houver e-mail, adicione: { label: "E-mail", url: "mailto:...", text: "..." }
     { label: "Discord", url: null, text: null }
   ],
-  contactSubjects: ["Dúvidas gerais", "Suporte técnico", "Assinaturas e pagamentos", "Cancelamento", "Privacidade", "Denúncias", "Outros assuntos"],
+  contactSubjects: ["Dúvidas gerais", "Suporte técnico", "Assinaturas e pagamentos", "Cancelamento", "Privacidade", "Direitos Autorais", "Moderação ou Apelação", "Denúncias", "Outros assuntos"],
 
   /* ---- Compatibilidade (nada de resultados inventados: preencha só o que foi testado) ---- */
   compat: {
@@ -99,6 +94,6 @@ var SITE = {
 
 /* ---- Downloads (MediaFire) ---- */
 var DOWNLOADS = {
-  app: "https://www.mediafire.com/file/vlde2plv01d46fo/DuoPlay_Retro_0.7.9_ARM32.apk/file",
+  app: "https://www.mediafire.com/file/lrvbqsherunj0tx/DuoPlay_Retro_0.7.0_ARM32.apk/file",
   ctrl: "https://www.mediafire.com/file/w8851yizvm5mpce/DuoPlay_Controle_2.0.0.apk/file"
 };
