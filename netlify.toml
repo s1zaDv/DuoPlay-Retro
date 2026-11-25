@@ -1,0 +1,57 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# A API roda como função; o site só fala com /api/*
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Links curtos e personalizados
+[[redirects]]
+  from = "/entrar"
+  to = "/conta.html"
+  status = 301
+[[redirects]]
+  from = "/cadastro"
+  to = "/conta.html#signup"
+  status = 301
+[[redirects]]
+  from = "/beta"
+  to = "/conta.html#beta"
+  status = 301
+[[redirects]]
+  from = "/termos"
+  to = "/legal.html#termos"
+  status = 301
+[[redirects]]
+  from = "/privacidade"
+  to = "/legal.html#privacidade"
+  status = 301
+[[redirects]]
+  from = "/cancelamento"
+  to = "/legal.html#cancelamento"
+  status = 301
+[[redirects]]
+  from = "/reembolso"
+  to = "/legal.html#reembolso"
+  status = 301
+[[redirects]]
+  from = "/regras"
+  to = "/legal.html#comunidade"
+  status = 301
+[[redirects]]
+  from = "/propriedade-intelectual"
+  to = "/legal.html#propriedade"
+  status = 301
+
+# Força HTTPS (o Netlify também faz isso sozinho)
+[[redirects]]
+  from = "http://duoplayretro.netlify.app/*"
+  to = "https://duoplayretro.netlify.app/:splat"
+  status = 301
+  force = true
