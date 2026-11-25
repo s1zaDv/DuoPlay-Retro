@@ -1,1 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minha conta · DuoPlay Retro</title>
+<meta name="description" content="Entre ou crie sua conta DuoPlay para participar da Beta, adicionar amigos e ver o que eles estão jogando.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎮%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF7F3;--paper:#FFFFFF;--ink:#0A1A17;--violet:#2FD07A;--blue:#4DB0FF;--soft:#CDEFE0;--mute:#3F5F55;--on:#0A1A17;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 1.0625rem/1.55 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-wrap:anywhere}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px 56px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:20px 0 8px}
+.logo{font-weight:800;font-stretch:75%;font-size:1.35rem;letter-spacing:-.02em;padding:4px 12px;background:var(--violet);color:var(--on);border:3px solid var(--ink);transform:rotate(-2deg);text-decoration:none}
+.nl,.crumbs a{color:var(--ink);font-weight:700}.nl{padding:8px 6px}.crumbs{color:var(--mute);margin:0 0 18px;font-size:.95rem}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:4px solid var(--violet);outline-offset:3px}
+h1{margin:0 0 14px;font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,3.2rem);line-height:1;text-transform:uppercase;letter-spacing:-.02em}
+h2{margin:0 0 8px;font-size:1.3rem}h3{margin:18px 0 6px;font-size:1.05rem}p{margin:0}.mute{color:var(--mute)}
+.brut{background:var(--paper);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}.card{padding:clamp(18px,4vw,32px)}
+.btn{font:800 1rem "Bricolage Grotesque",system-ui,sans-serif;color:var(--on);background:var(--blue);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:10px 18px;min-height:44px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;transition:transform .16s cubic-bezier(.23,1,.32,1),box-shadow .16s cubic-bezier(.23,1,.32,1)}
+.btn.v{background:var(--violet)}.btn.p{background:var(--paper);color:var(--ink)}.btn.sm{padding:6px 12px;min-height:36px;box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}.btn[disabled]{opacity:.6;cursor:not-allowed}
+@media (hover:hover){.btn:hover:not([disabled]){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}.btn:active:not([disabled]){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}.tabs .btn[aria-pressed="true"]{background:var(--violet)}
+.f{display:grid;gap:14px}.f[hidden],[hidden]{display:none!important}.f label{display:grid;gap:6px;font-weight:700}
+input[type=text],input[type=email],input[type=password],input[type=tel],textarea{font:500 1rem "Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);background:var(--paper);border:3px solid var(--ink);padding:10px 12px;width:100%;min-height:44px}
+textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-template-columns:none;gap:10px;align-items:flex-start;font-weight:500!important}.chk input{width:22px;height:22px;margin-top:2px;flex:none}
+.msg{margin-top:14px;min-height:1.5em;font-weight:700}.msg.err{color:#8A1C1C}
+.prof{overflow:hidden}.banner{height:140px;background:var(--soft) center/cover no-repeat;border-bottom:3px solid var(--ink)}
+.who{display:flex;gap:16px;align-items:flex-end;padding:0 20px 16px;margin-top:-44px;flex-wrap:wrap}
+.av{width:88px;height:88px;border:3px solid var(--ink);background:var(--violet) center/cover no-repeat;display:grid;place-items:center;font-weight:800;font-size:2rem;flex:none}
+.who h2{margin:0}
+.pane{margin-top:22px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:2px solid var(--ink)}.row:last-child{border-bottom:0}
+.mini{display:flex;gap:12px;align-items:center}.mini .av{width:44px;height:44px;font-size:1.1rem}
+.act{display:inline-block;background:var(--violet);border:3px solid var(--ink);padding:0 10px;font-weight:800}
+.bar{height:18px;border:3px solid var(--ink);background:var(--paper);margin:8px 0 14px}.bar div{height:100%;background:var(--violet)}
+.qr{max-width:200px;background:#fff;border:3px solid var(--ink);padding:8px;display:block}code{background:var(--soft);padding:2px 6px;border:2px solid var(--ink)}
+.danger{border-color:#8A1C1C}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="index.html">DuoPlay Retro</a><a class="nl" href="index.html">Voltar ao site</a></div>
+  <nav class="crumbs" aria-label="Você está em"><a href="index.html">Início</a> › <span>Conta</span></nav>
 
+  <main>
+  <!-- ===== Entrar / criar conta ===== -->
+  <section id="vAuth" hidden>
+    <h1>Sua conta</h1>
+    <div class="tabs" id="aTabs">
+      <button class="btn" type="button" data-v="login" aria-pressed="true">Entrar</button>
+      <button class="btn" type="button" data-v="signup" aria-pressed="false">Criar conta</button>
+      <button class="btn" type="button" data-v="forgot" aria-pressed="false">Esqueci a senha</button>
+    </div>
+    <div class="brut card">
+      <form class="f" id="fLogin" novalidate>
+        <label>E-mail<input type="email" name="email" autocomplete="email" required></label>
+        <label>Senha<input type="password" name="password" autocomplete="current-password" required></label>
+        <div class="cap" data-cap="login"></div>
+        <div><button class="btn v" type="submit">Entrar</button></div>
+      </form>
+      <form class="f" id="fMfa" hidden novalidate>
+        <p>Digite o código de 6 dígitos do seu aplicativo autenticador.</p>
+        <label>Código<input type="text" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required></label>
+        <div><button class="btn v" type="submit">Confirmar</button></div>
+      </form>
+      <form class="f" id="fSignup" hidden novalidate>
+        <label>E-mail<input type="email" name="email" autocomplete="email" required></label>
+        <label>Nome de usuário <span class="mute">(3 a 20: letras minúsculas, números e _)</span><input type="text" name="username" autocomplete="username" maxlength="20" required></label>
+        <label>Senha <span class="mute">(mínimo 10 caracteres)</span><input type="password" name="password" autocomplete="new-password" minlength="10" required></label>
+        <label class="chk"><input type="checkbox" name="terms"><span>Li e aceito os <a href="legal.html#termos">Termos de Uso</a> e a <a href="legal.html#privacidade">Política de Privacidade</a>.</span></label>
+        <div class="cap" data-cap="signup"></div>
+        <div><button class="btn v" type="submit">Criar conta</button></div>
+        <p class="mute">Depois de criar, enviamos um e-mail para confirmar o endereço. Sua tag (#0000) é sorteada automaticamente.</p>
+      </form>
+      <form class="f" id="fForgot" hidden novalidate>
+        <label>E-mail da conta<input type="email" name="email" autocomplete="email" required></label>
+        <div class="cap" data-cap="forgot"></div>
+        <div><button class="btn v" type="submit">Enviar link de recuperação</button></div>
+      </form>
+      <form class="f" id="fReset" hidden novalidate>
+        <p>Escolha uma nova senha.</p>
+        <label>Nova senha <span class="mute">(mínimo 10 caracteres)</span><input type="password" name="password" autocomplete="new-password" minlength="10" required></label>
+        <div><button class="btn v" type="submit">Salvar nova senha</button></div>
+      </form>
+      <p class="msg" id="aMsg" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ===== Área logada ===== -->
+  <section id="vApp" hidden>
+    <div class="brut prof">
+      <div class="banner" id="mBanner" role="img" aria-label="Banner do perfil"></div>
+      <div class="who"><div class="av" id="mAv" role="img" aria-label="Foto de perfil"></div><div><h2 id="mName"></h2><p class="mute" id="mTag"></p></div></div>
+    </div>
+    <div class="tabs pane" id="tTabs" role="tablist">
+      <button class="btn" type="button" data-t="perfil" aria-pressed="true">Perfil</button>
+      <button class="btn" type="button" data-t="amigos" aria-pressed="false">Amigos</button>
+      <button class="btn" type="button" data-t="atividade" aria-pressed="false">Atividade</button>
+      <button class="btn" type="button" data-t="beta" aria-pressed="false">Beta</button>
+      <button class="btn" type="button" data-t="seguranca" aria-pressed="false">Segurança</button>
+      <button class="btn" type="button" data-t="vincular" aria-pressed="false">App</button>
+    </div>
+
+    <div class="brut card" data-pane="perfil">
+      <h2>Perfil</h2>
+      <form class="f" id="fProf" novalidate>
+        <label>Nome de exibição<input type="text" name="display_name" maxlength="32" required></label>
+        <label>Biografia <span class="mute">(até 280 caracteres)</span><textarea name="bio" maxlength="280"></textarea></label>
+        <label>Telefone <span class="mute">(opcional; fica criptografado)</span><input type="tel" name="phone" autocomplete="tel" maxlength="20"></label>
+        <label class="chk"><input type="checkbox" name="show_activity"><span>Mostrar aos meus amigos o que estou jogando.</span></label>
+        <div><button class="btn v" type="submit">Salvar perfil</button></div>
+      </form>
+      <h3>Fotos</h3>
+      <div class="f">
+        <label>Foto de perfil<input type="file" id="upAv" accept="image/png,image/jpeg,image/webp"></label>
+        <label>Banner<input type="file" id="upBn" accept="image/png,image/jpeg,image/webp"></label>
+        <p class="mute">Formatos PNG, JPG ou WebP. As imagens são reduzidas antes do envio.</p>
+      </div>
+      <p class="mute" style="margin-top:12px">E-mail: <span id="mMail"></span></p>
+      <p class="msg" id="pMsg" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="brut card" data-pane="amigos" hidden>
+      <h2>Amigos</h2>
+      <form class="f" id="fAdd" novalidate>
+        <label>Adicionar amigo <span class="mute">(usuário#0000)</span><input type="text" name="who" placeholder="exemplo#1234" maxlength="26" autocomplete="off"></label>
+        <div><button class="btn v" type="submit">Enviar pedido</button></div>
+      </form>
+      <p class="msg" id="fMsg" role="status" aria-live="polite"></p>
+      <h3>Pedidos recebidos</h3><div id="lIn"></div>
+      <h3>Pedidos enviados</h3><div id="lOut"></div>
+      <h3>Seus amigos</h3><div id="lFr"></div>
+    </div>
+
+    <div class="brut card" data-pane="atividade" hidden>
+      <h2>Atividade dos amigos</h2>
+      <p class="mute">Quem está jogando agora. A lista atualiza sozinha a cada 30 segundos.</p>
+      <div id="lAct"></div>
+    </div>
+
+    <div class="brut card" data-pane="beta" hidden>
+      <h2>Beta do DuoPlay</h2>
+      <p id="bTxt"></p>
+      <div class="bar" aria-hidden="true"><div id="bBar" style="width:0"></div></div>
+      <ul>
+        <li>Para entrar na Beta é preciso ter uma conta.</li>
+        <li>As vagas são limitadas a 1.000 pessoas.</li>
+        <li>Na Beta, o limite é de 1 hora de uso por dia, contado por 24 horas a partir da meia-noite (horário de Brasília). Na versão oficial, o limite diário será de 10 minutos.</li>
+      </ul>
+      <p id="bUse" class="mute" style="margin:10px 0"></p>
+      <button class="btn v" type="button" id="bJoin">Se cadastrar na Beta</button>
+      <p class="msg" id="bMsg" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="brut card" data-pane="seguranca" hidden>
+      <h2>Segurança</h2>
+      <h3>Verificação em duas etapas</h3>
+      <p id="sTxt"></p>
+      <div id="sSetup" hidden>
+        <p>Escaneie o QR code no aplicativo autenticador (Google Authenticator, Authy, Microsoft Authenticator…) ou digite a chave:</p>
+        <img class="qr" id="sQr" alt="QR code para configurar a verificação em duas etapas" width="200" height="200">
+        <p style="margin:10px 0">Chave: <code id="sKey"></code></p>
+        <form class="f" id="fMfaOn" novalidate><label>Código de 6 dígitos<input type="text" name="code" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></label><div><button class="btn v" type="submit">Ativar</button></div></form>
+      </div>
+      <div style="margin-top:12px"><button class="btn v" type="button" id="sOn">Ativar verificação em duas etapas</button> <button class="btn p" type="button" id="sOff" hidden>Desativar</button></div>
+      <h3>Sessão</h3>
+      <button class="btn p" type="button" id="bOut">Sair da conta</button>
+      <h3>Excluir conta</h3>
+      <p class="mute">Apaga sua conta e seus dados. Não dá para desfazer. Digite EXCLUIR para confirmar.</p>
+      <form class="f" id="fDel" novalidate style="margin-top:8px"><input type="text" name="confirm" autocomplete="off" aria-label="Digite EXCLUIR"><div><button class="btn p danger" type="submit">Excluir minha conta</button></div></form>
+      <p class="msg" id="sMsg" role="status" aria-live="polite"></p>
+    </div>
+
+    <div class="brut card" data-pane="vincular" hidden>
+      <h2>Vincular o app</h2>
+      <p>No aplicativo, escolha entrar com a conta DuoPlay. Ele mostra um código no formato <code>ABCD-1234</code>. Digite aqui para vincular.</p>
+      <form class="f" id="fLink" novalidate style="margin-top:12px"><label>Código do app<input type="text" name="user_code" maxlength="9" autocomplete="off" placeholder="ABCD-1234"></label><div><button class="btn v" type="submit">Vincular</button></div></form>
+      <p class="msg" id="lMsg" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+  </main>
+</div>
+
+<script src="config.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=dpCaptcha" async defer></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  function h(tag, attrs, kids) {                       // cria elementos usando textContent (nunca innerHTML com dados de usuário)
+    var e = document.createElement(tag), k;
+    for (k in attrs || {}) { if (k === "class") e.className = attrs[k]; else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), attrs[k]); else e.setAttribute(k, attrs[k]); }
+    [].concat(kids == null ? [] : kids).forEach(function (c) { e.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return e;
+  }
+  var ERR = {
+    invalid_credentials: "E-mail ou senha incorretos, ou o e-mail ainda não foi confirmado.", rate_limited: "Muitas tentativas. Aguarde um pouco e tente de novo.",
+    captcha: "Confirme que você não é um robô.", invalid_input: "Confira os campos e tente de novo.", terms_required: "Aceite os Termos de Uso e a Política de Privacidade.",
+    mfa_invalid: "Código inválido ou expirado.", not_configured: "O servidor ainda não está configurado.", reset_failed: "Link de recuperação inválido ou expirado.",
+    invalid_image: "Imagem inválida ou grande demais.", unauthorized: "Sua sessão expirou. Entre de novo.", forbidden: "Ação bloqueada. Recarregue a página."
+  };
+  function say(el, text, bad) { el.textContent = text; el.className = "msg" + (bad ? " err" : ""); }
+  async function api(path, method, body) {
+    var r = await fetch("/api" + path, { method: method || "GET", headers: body ? { "Content-Type": "application/json" } : {}, body: body ? JSON.stringify(body) : undefined, credentials: "same-origin" });
+    var d = {}; try { d = await r.json(); } catch (e) { /* sem corpo */ }
+    if (!r.ok) { var er = new Error(d.error || "erro"); er.code = d.error; er.status = r.status; throw er; }
+    return d;
+  }
+  var msgOf = function (e) { return ERR[e.code] || "Algo deu errado. Tente de novo em instantes."; };
+  var fmt = function (n) { return Number(n).toLocaleString("pt-BR"); };
+
+  /* ---- antirrobô (Turnstile) ---- */
+  var capId = {}, capTok = {};
+  window.dpCaptcha = function () {
+    if (!SITE.turnstileSiteKey || !window.turnstile) return;
+    $$(".cap").forEach(function (box) { var n = box.dataset.cap; capId[n] = window.turnstile.render(box, { sitekey: SITE.turnstileSiteKey, callback: function (t) { capTok[n] = t; }, "expired-callback": function () { capTok[n] = ""; } }); });
+  };
+  var cap = function (n) { return capTok[n] || ""; };
+  var capReset = function (n) { capTok[n] = ""; if (window.turnstile && capId[n] !== undefined) window.turnstile.reset(capId[n]); };
+
+  /* ---- visões ---- */
+  function showAuth(v) {
+    $("#vApp").hidden = true; $("#vAuth").hidden = false;
+    var map = { login: "#fLogin", signup: "#fSignup", forgot: "#fForgot", reset: "#fReset", mfa: "#fMfa" };
+    Object.keys(map).forEach(function (k) { $(map[k]).hidden = k !== v; });
+    $$("#aTabs .btn").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === v ? "true" : "false"); });
+    say($("#aMsg"), "");
+  }
+  $("#aTabs").addEventListener("click", function (e) { var b = e.target.closest("[data-v]"); if (b) showAuth(b.dataset.v); });
+
+  async function submit(form, name, fn) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); var btn = $("button[type=submit]", form); btn.disabled = true;
+      try { await fn(new FormData(form)); } catch (er) { say($("#aMsg"), msgOf(er), true); } finally { btn.disabled = false; if (name) capReset(name); }
+    });
+  }
+  submit($("#fLogin"), "login", async function (f) {
+    var d = await api("/auth/login", "POST", { email: f.get("email"), password: f.get("password"), captcha: cap("login") });
+    if (d.mfa) { showAuth("mfa"); return; }
+    boot();
+  });
+  submit($("#fMfa"), "", async function (f) { await api("/auth/mfa", "POST", { code: String(f.get("code")).trim() }); boot(); });
+  submit($("#fSignup"), "signup", async function (f) {
+    await api("/auth/signup", "POST", { email: f.get("email"), username: String(f.get("username")).toLowerCase(), password: f.get("password"), terms: f.get("terms") === "on", captcha: cap("signup") });
+    say($("#aMsg"), "Pronto! Se os dados estiverem corretos, enviamos um e-mail para confirmar seu endereço. Depois é só entrar.");
+  });
+  submit($("#fForgot"), "forgot", async function (f) {
+    await api("/auth/forgot", "POST", { email: f.get("email"), captcha: cap("forgot") });
+    say($("#aMsg"), "Se existir uma conta com esse e-mail, enviamos um link para criar uma nova senha.");
+  });
+  var recoveryToken = "";
+  submit($("#fReset"), "", async function (f) {
+    await api("/auth/reset", "POST", { access_token: recoveryToken, password: f.get("password") });
+    recoveryToken = ""; showAuth("login"); say($("#aMsg"), "Senha alterada. Entre com a nova senha.");
+  });
+
+  /* ---- área logada ---- */
+  var me = null, actTimer = null;
+  function tab(t) {
+    $$("#tTabs .btn").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.t === t ? "true" : "false"); });
+    $$("[data-pane]").forEach(function (p) { p.hidden = p.dataset.pane !== t; });
+    clearInterval(actTimer);
+    if (t === "amigos") loadFriends();
+    if (t === "atividade") { loadActivity(); actTimer = setInterval(loadActivity, 30000); }
+    if (t === "beta") loadBeta();
+  }
+  $("#tTabs").addEventListener("click", function (e) { var b = e.target.closest("[data-t]"); if (b) { tab(b.dataset.t); history.replaceState(null, "", "#" + b.dataset.t); } });
+
+  function avatarBox(el, p) {
+    el.textContent = ""; el.style.backgroundImage = "";
+    if (p.avatar) el.style.backgroundImage = 'url("' + p.avatar + '")'; else el.textContent = (p.display_name || p.username || "?").charAt(0).toUpperCase();
+  }
+  function paint(d) {
+    me = d.me;
+    $("#mName").textContent = me.display_name; $("#mTag").textContent = me.username + "#" + me.tag;
+    avatarBox($("#mAv"), me); $("#mBanner").style.backgroundImage = me.banner ? 'url("' + me.banner + '")' : "";
+    var f = $("#fProf"); f.display_name.value = me.display_name; f.bio.value = me.bio; f.phone.value = me.phone; f.show_activity.checked = me.show_activity;
+    $("#mMail").textContent = me.email;
+    $("#sTxt").textContent = me.two_factor ? "Ativada. Ao entrar, será pedido o código do aplicativo autenticador." : "Desativada. Recomendamos ativar para proteger sua conta.";
+    $("#sOn").hidden = me.two_factor; $("#sOff").hidden = !me.two_factor; $("#sSetup").hidden = true;
+    betaPaint(d.beta);
+  }
+  async function boot() {
+    try {
+      paint(await api("/me")); $("#vAuth").hidden = true; $("#vApp").hidden = false;
+      var t = location.hash.slice(1); tab(["perfil", "amigos", "atividade", "beta", "seguranca", "vincular"].indexOf(t) > -1 ? t : "perfil");
+    } catch (e) {
+      var fr = new URLSearchParams(location.hash.slice(1));
+      showAuth(location.hash === "#signup" || location.hash === "#cadastro" ? "signup" : "login");
+      if (e.code && e.code !== "unauthorized") say($("#aMsg"), msgOf(e), true);
+    }
+  }
+  submit0($("#fProf"), $("#pMsg"), async function (f) {
+    await api("/me", "PATCH", { display_name: f.get("display_name"), bio: f.get("bio"), phone: f.get("phone"), show_activity: f.get("show_activity") === "on" });
+    paint(await api("/me")); say($("#pMsg"), "Perfil salvo.");
+  });
+  function submit0(form, out, fn) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault(); var btn = $("button[type=submit]", form); btn.disabled = true;
+      try { await fn(new FormData(form)); } catch (er) { say(out, msgOf(er), true); if (er.status === 401) boot(); } finally { btn.disabled = false; }
+    });
+  }
+  function resize(file, w, hgt) {                         // reduz e recorta a imagem antes de enviar
+    return new Promise(function (ok, no) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var c = document.createElement("canvas"); c.width = w; c.height = hgt; var x = c.getContext("2d");
+        var s = Math.max(w / img.width, hgt / img.height), dw = img.width * s, dh = img.height * s;
+        x.drawImage(img, (w - dw) / 2, (hgt - dh) / 2, dw, dh); URL.revokeObjectURL(url); ok(c.toDataURL("image/jpeg", 0.85));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); no(new Error("img")); }; img.src = url;
+    });
+  }
+  function upload(input, path, w, hgt) {
+    input.addEventListener("change", async function () {
+      var f = input.files[0]; if (!f) return;
+      if (!/^image\/(png|jpeg|webp)$/.test(f.type) || f.size > 15e6) { say($("#pMsg"), ERR.invalid_image, true); return; }
+      try { await api(path, "POST", { image: await resize(f, w, hgt) }); paint(await api("/me")); say($("#pMsg"), "Imagem atualizada."); }
+      catch (e) { say($("#pMsg"), msgOf(e), true); } input.value = "";
+    });
+  }
+  upload($("#upAv"), "/me/avatar", 256, 256); upload($("#upBn"), "/me/banner", 1200, 400);
+
+  /* ---- amigos ---- */
+  function person(p, buttons) {
+    var av = h("div", { class: "av", "aria-hidden": "true" }); avatarBox(av, p);
+    return h("div", { class: "row" }, [h("div", { class: "mini" }, [av, h("div", {}, [h("b", {}, p.display_name), h("div", { class: "mute" }, p.username + "#" + p.tag)])]), h("div", { class: "mini" }, buttons || [])]);
+  }
+  function fill(box, list, build, empty) { box.textContent = ""; if (!list.length) box.appendChild(h("p", { class: "mute" }, empty)); list.forEach(function (p) { box.appendChild(build(p)); }); }
+  async function loadFriends() {
+    try {
+      var d = await api("/friends");
+      fill($("#lIn"), d.incoming, function (p) { return person(p, [h("button", { class: "btn v sm", type: "button", onclick: function () { respond(p.id, true); } }, "Aceitar"), h("button", { class: "btn p sm", type: "button", onclick: function () { respond(p.id, false); } }, "Recusar")]); }, "Nenhum pedido.");
+      fill($("#lOut"), d.outgoing, function (p) { return person(p, [h("button", { class: "btn p sm", type: "button", onclick: function () { removeF(p.id); } }, "Cancelar")]); }, "Nenhum pedido enviado.");
+      fill($("#lFr"), d.friends, function (p) { return person(p, [h("button", { class: "btn p sm", type: "button", onclick: function () { if (confirm("Remover " + p.username + "#" + p.tag + "?")) removeF(p.id); } }, "Remover")]); }, "Você ainda não tem amigos adicionados.");
+    } catch (e) { say($("#fMsg"), msgOf(e), true); }
+  }
+  async function respond(id, accept) { try { await api("/friends/respond", "POST", { id: id, accept: accept }); loadFriends(); } catch (e) { say($("#fMsg"), msgOf(e), true); } }
+  async function removeF(id) { try { await api("/friends/" + id, "DELETE"); loadFriends(); } catch (e) { say($("#fMsg"), msgOf(e), true); } }
+  var FR = { sent: "Pedido enviado.", accepted: "Vocês agora são amigos.", exists: "Vocês já são amigos.", pending: "Já existe um pedido pendente.", not_found: "Usuário não encontrado. Confira o nome e a tag.", self: "Você não pode adicionar a si mesmo.", too_many: "Limite de pedidos pendentes atingido." };
+  submit0($("#fAdd"), $("#fMsg"), async function (f) {
+    var m = /^\s*([a-z0-9_]{3,20})\s*#\s*(\d{4})\s*$/i.exec(String(f.get("who")));
+    if (!m) { say($("#fMsg"), "Use o formato usuário#0000.", true); return; }
+    var d = await api("/friends/request", "POST", { username: m[1].toLowerCase(), tag: m[2] });
+    say($("#fMsg"), FR[d.result] || "Feito."); $("#fAdd").reset(); loadFriends();
+  });
+  async function loadActivity() {
+    try {
+      var d = await api("/friends/activity");
+      fill($("#lAct"), d.activity, function (p) {
+        return person(p, [h("span", { class: "act" }, p.game_title + (p.platform ? " · " + p.platform : ""))]);
+      }, "Nenhum amigo está jogando agora.");
+    } catch (e) { clearInterval(actTimer); }
+  }
+
+  /* ---- Beta ---- */
+  function betaPaint(b) {
+    if (!b) return;
+    $("#bTxt").textContent = fmt(b.taken) + " de " + fmt(b.total) + " vagas preenchidas.";
+    $("#bBar").style.width = Math.min(100, (b.taken / b.total) * 100) + "%";
+    var j = $("#bJoin"); j.disabled = b.joined || b.taken >= b.total;
+    j.textContent = b.joined ? "Você já está na Beta" : b.taken >= b.total ? "Vagas esgotadas" : "Se cadastrar na Beta";
+    $("#bUse").textContent = b.joined ? "Hoje você usou " + Math.round(b.used_seconds / 60) + " de " + Math.round(b.limit_seconds / 60) + " minutos." : "";
+  }
+  async function loadBeta() { try { betaPaint((await api("/beta")).beta); } catch (e) { say($("#bMsg"), msgOf(e), true); } }
+  $("#bJoin").addEventListener("click", async function () {
+    try {
+      var d = await api("/beta/join", "POST", {}), s = d.result && d.result.status;
+      if (s === "joined") { location.href = "obrigado.html?de=beta"; return; }
+      say($("#bMsg"), s === "already" ? "Você já está na Beta." : s === "full" ? "As 1.000 vagas já foram preenchidas." : "Não foi possível cadastrar agora.", s !== "already"); loadBeta();
+    } catch (e) { say($("#bMsg"), msgOf(e), true); }
+  });
+
+  /* ---- segurança ---- */
+  var factorId = "";
+  $("#sOn").addEventListener("click", async function () {
+    try {
+      var d = await api("/me/mfa/enroll", "POST", {}); factorId = d.factorId;
+      if (/^data:image\/svg\+xml/.test(d.qr || "")) $("#sQr").src = d.qr;
+      $("#sKey").textContent = d.secret; $("#sSetup").hidden = false; $("#sOn").hidden = true;
+    } catch (e) { say($("#sMsg"), msgOf(e), true); }
+  });
+  submit0($("#fMfaOn"), $("#sMsg"), async function (f) {
+    await api("/me/mfa/verify", "POST", { factorId: factorId, code: String(f.get("code")).trim() });
+    say($("#sMsg"), "Verificação em duas etapas ativada."); paint(await api("/me"));
+  });
+  $("#sOff").addEventListener("click", async function () {
+    if (!confirm("Desativar a verificação em duas etapas?")) return;
+    try { await api("/me/mfa", "DELETE"); say($("#sMsg"), "Desativada."); paint(await api("/me")); } catch (e) { say($("#sMsg"), msgOf(e), true); }
+  });
+  $("#bOut").addEventListener("click", async function () { try { await api("/auth/logout", "POST", {}); } catch (e) { /* sai mesmo assim */ } location.href = "conta.html"; });
+  submit0($("#fDel"), $("#sMsg"), async function (f) {
+    await api("/me", "DELETE", { confirm: String(f.get("confirm")).trim() }); location.href = "index.html";
+  });
+
+  /* ---- vincular app ---- */
+  submit0($("#fLink"), $("#lMsg"), async function (f) {
+    var d = await api("/me/device/approve", "POST", { user_code: String(f.get("user_code")).trim().toUpperCase() });
+    say($("#lMsg"), d.result === "ok" ? "App vinculado! Volte ao aplicativo." : "Código inválido ou expirado.", d.result !== "ok");
+  });
+
+  /* ---- início: trata links de e-mail (confirmação e recuperação) ---- */
+  (function () {
+    var fr = new URLSearchParams(location.hash.slice(1)), type = fr.get("type");
+    if (type === "recovery" && fr.get("access_token")) {
+      recoveryToken = fr.get("access_token"); history.replaceState(null, "", location.pathname);
+      $("#vAuth").hidden = false; showAuth("reset"); return;
+    }
+    if (type === "signup" || location.hash === "#confirmado") {
+      history.replaceState(null, "", location.pathname); boot().then(function () { if (!$("#vAuth").hidden) say($("#aMsg"), "E-mail confirmado! Agora é só entrar."); }); return;
+    }
+    boot();
+  })();
+})();
+</script>
+</body>
+</html>
