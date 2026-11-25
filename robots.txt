@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /conta.html
-Disallow: /obrigado.html
-Disallow: /api/
-
-Sitemap: https://duoplayretro.netlify.app/sitemap.xml
