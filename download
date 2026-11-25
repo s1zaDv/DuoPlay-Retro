@@ -1,9 +1,0 @@
-# Segredos: NUNCA vão para o git
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-node_modules/
-.netlify/
-.DS_Store
