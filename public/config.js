@@ -90,7 +90,7 @@ var SITE = {
 
   /* ---- Beta, conta e projeto ---- */
   beta: { slots: 1000, dailyMinutes: 60, officialDailyMinutes: 10 },   // as regras valem no banco (tabela beta_config)
-  turnstileSiteKey: null,                // chave PÚBLICA do Cloudflare Turnstile (antirrobô); null = sem widget
+  turnstileSiteKey: "0x4AAAAAAGTc5wj6-aUXXLmM",                // chave PÚBLICA do Cloudflare Turnstile (antirrobô); null = sem widget
   analytics: { gaId: null },             // ex.: "G-XXXXXXXXXX"; só carrega se a pessoa aceitar o aviso
   pix: null,                             // chave Pix para doações; null = botão "em breve"
   team: { name: "s1za", photo: null, bio: "Projeto independente, feito por uma pessoa e mantido com a ajuda da comunidade." },
