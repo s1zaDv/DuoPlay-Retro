@@ -21,24 +21,11 @@
 
 ### 📌 Sobre o projeto
 
-O **DuoPlay** é um projeto independente desenvolvido com o objetivo de explorar o desenvolvimento web, integração com bancos de dados e criação de sistemas interativos.
+O **DuoPlay** é um projeto independente voltado à arquitetura de emulação e **recompilação** em WebAssembly, criado para levar jogos de console a celulares, TV Boxes de hardware modesto e ambientes web sem exigir um PC ligado nem recorrer a atalhos que comprometam o quadro.
 
-A plataforma apresenta um ambiente voltado à comunidade de jogos retrô, reunindo informações sobre o projeto, gerenciamento de contas, participação na Beta e recursos de suporte aos usuários.
+A proposta reúne um runtime próprio, organização de biblioteca com sistema manual estilo **Memory Card**, suporte expandido a controles e layout editável, além da integração com o ecossistema web do projeto, a comunidade e o fluxo de testes de builds.
 
-Este projeto faz parte do meu portfólio de desenvolvimento e representa uma oportunidade de colocar em prática conhecimentos adquiridos em programação, organização de sistemas e integração entre tecnologias.
-
-### 🚀 Funcionalidades
-
-- Página institucional com informações sobre o projeto.
-- Sistema de cadastro e autenticação de usuários.
-- Gerenciamento de contas e perfis.
-- Verificação de segurança em duas etapas (2FA).
-- Sistema de amizades entre usuários.
-- Inscrição e gerenciamento de participação na Beta.
-- Central de compatibilidade e atualizações.
-- FAQ e central de atendimento à comunidade.
-- Proteção contra acessos automatizados.
-- Integração com banco de dados e funções de backend.
+Este projeto faz parte do meu **portfólio** e representa uma frente prática de **engenharia de software**, **análise de arquitetura de hardware**, **depuração iterativa e integração de sistemas**.
 
 ### 🛠️ Tecnologias e ferramentas
 
@@ -73,18 +60,6 @@ DuoPlay-Retro/
 ├── netlify.toml         # Configurações do Netlify
 └── package.json         # Configurações do projeto
 ```
-
-### 🎯 Objetivos de aprendizado
-
-Durante o desenvolvimento deste projeto, busco aprofundar conhecimentos em:
-
-- Desenvolvimento Front-end e Back-end.
-- Integração de APIs e serviços externos.
-- Modelagem e gerenciamento de bancos de dados.
-- Autenticação e segurança de aplicações.
-- Organização e estruturação de projetos.
-- Deploy e hospedagem de aplicações web.
-- Experiência do usuário e responsividade.
 
 ### 🌐 Acesse o projeto
 
