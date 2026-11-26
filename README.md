@@ -43,15 +43,15 @@ Este projeto faz parte do meu portfólio de desenvolvimento e representa uma opo
 ### 🛠️ Tecnologias e ferramentas
 
 <p align="left">
-  <img src="https://img.shields.io/badge/HTML5-915626?style=for-the-badge&logo=html5&logoColor=white">
-  <img src="https://img.shields.io/badge/CSS3-915626?style=for-the-badge&logo=css3&logoColor=white">
-  <img src="https://img.shields.io/badge/JavaScript-915626?style=for-the-badge&logo=javascript&logoColor=white">
-  <img src="https://img.shields.io/badge/Node.js-915626?style=for-the-badge&logo=nodedotjs&logoColor=white">
-  <img src="https://img.shields.io/badge/Supabase-915626?style=for-the-badge&logo=supabase&logoColor=white">
-  <img src="https://img.shields.io/badge/Netlify-915626?style=for-the-badge&logo=netlify&logoColor=white">
-  <img src="https://img.shields.io/badge/Cloudflare-915626?style=for-the-badge&logo=cloudflare&logoColor=white">
-  <img src="https://img.shields.io/badge/Git-915626?style=for-the-badge&logo=git&logoColor=white">
-  <img src="https://img.shields.io/badge/GitHub-915626?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/HTML5-2ECC71?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-3498DB?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-2ECC71?style=for-the-badge&logo=javascript&logoColor=white">
+  <img src="https://img.shields.io/badge/Node.js-3498DB?style=for-the-badge&logo=nodedotjs&logoColor=white">
+  <img src="https://img.shields.io/badge/Supabase-2ECC71?style=for-the-badge&logo=supabase&logoColor=white">
+  <img src="https://img.shields.io/badge/Netlify-3498DB?style=for-the-badge&logo=netlify&logoColor=white">
+  <img src="https://img.shields.io/badge/Cloudflare-2ECC71?style=for-the-badge&logo=cloudflare&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-3498DB?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-2ECC71?style=for-the-badge&logo=github&logoColor=white">
 </p>
 
 ### ⚙️ Estrutura do projeto
