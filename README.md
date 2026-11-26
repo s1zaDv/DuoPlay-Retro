@@ -96,7 +96,7 @@ Durante o desenvolvimento deste projeto, busco aprofundar conhecimentos em:
 
 **Status:** Em desenvolvimento.
 
-**Finalidade:** Projeto independente de estudos e portfólio.
+**Finalidade:** Projeto independente, afim de devolver a potência bruta do console ao bolso e à sala via WebAssembly em hardware modesto, sem depender de PCs ligados nem de atalhos que traem o quadro.
 
 ---
 
