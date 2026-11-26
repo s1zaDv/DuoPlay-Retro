@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://duoplayretro.netlify.app/">
-    <img src="https://img.shields.io/badge/Acessar_Projeto-915626?style=for-the-badge&logo=googlechrome&logoColor=white">
+    <img src="https://img.shields.io/badge/Acessar_Projeto-2ECC71?style=for-the-badge&logo=googlechrome&logoColor=white">
   </a>
   <a href="https://github.com/s1zaDv/DuoPlay-Retro">
-    <img src="https://img.shields.io/badge/GitHub-915626?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/GitHub-3498DB?style=for-the-badge&logo=github&logoColor=white">
   </a>
 </p>
 
@@ -90,7 +90,7 @@ Durante o desenvolvimento deste projeto, busco aprofundar conhecimentos em:
 
 <p align="center">
   <a href="https://duoplayretro.netlify.app/">
-    <img src="https://img.shields.io/badge/DUOPLAY_RETRO-915626?style=for-the-badge&logo=googlechrome&logoColor=white">
+    <img src="https://img.shields.io/badge/DUOPLAY_RETRO-2ECC71?style=for-the-badge&logo=googlechrome&logoColor=white">
   </a>
 </p>
 
