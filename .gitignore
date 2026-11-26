@@ -1,0 +1,23 @@
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Certificados e chaves privadas
+*.pem
+*.key
+
+# Dependências
+node_modules/
+
+# Arquivos locais
+.netlify/
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos temporários
+.cache/
