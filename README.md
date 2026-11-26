@@ -1,21 +1,107 @@
-# DuoPlay: site, contas e Beta
+# 🎮 DuoPlay Retro
 
+<h1 align="center">DuoPlay</h1>
+
+<h3 align="center">Uma experiência de jogos retrô, comunidade e conexão.</h3>
+
+<p align="center">
+  <a href="https://duoplayretro.netlify.app/">
+    <img src="https://img.shields.io/badge/Acessar_Projeto-915626?style=for-the-badge&logo=googlechrome&logoColor=white">
+  </a>
+  <a href="https://github.com/s1zaDv/DuoPlay-Retro">
+    <img src="https://img.shields.io/badge/GitHub-915626?style=for-the-badge&logo=github&logoColor=white">
+  </a>
+</p>
+
+<p align="center">
+  <i>Conectando pessoas através da nostalgia dos jogos.</i>
+</p>
+
+---
+
+### 📌 Sobre o projeto
+
+O **DuoPlay** é um projeto independente desenvolvido com o objetivo de explorar o desenvolvimento web, integração com bancos de dados e criação de sistemas interativos.
+
+A plataforma apresenta um ambiente voltado à comunidade de jogos retrô, reunindo informações sobre o projeto, gerenciamento de contas, participação na Beta e recursos de suporte aos usuários.
+
+Este projeto faz parte do meu portfólio de desenvolvimento e representa uma oportunidade de colocar em prática conhecimentos adquiridos em programação, organização de sistemas e integração entre tecnologias.
+
+### 🚀 Funcionalidades
+
+- Página institucional com informações sobre o projeto.
+- Sistema de cadastro e autenticação de usuários.
+- Gerenciamento de contas e perfis.
+- Verificação de segurança em duas etapas (2FA).
+- Sistema de amizades entre usuários.
+- Inscrição e gerenciamento de participação na Beta.
+- Central de compatibilidade e atualizações.
+- FAQ e central de atendimento à comunidade.
+- Proteção contra acessos automatizados.
+- Integração com banco de dados e funções de backend.
+
+### 🛠️ Tecnologias e ferramentas
+
+<p align="left">
+  <img src="https://img.shields.io/badge/HTML5-915626?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-915626?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-915626?style=for-the-badge&logo=javascript&logoColor=white">
+  <img src="https://img.shields.io/badge/Node.js-915626?style=for-the-badge&logo=nodedotjs&logoColor=white">
+  <img src="https://img.shields.io/badge/Supabase-915626?style=for-the-badge&logo=supabase&logoColor=white">
+  <img src="https://img.shields.io/badge/Netlify-915626?style=for-the-badge&logo=netlify&logoColor=white">
+  <img src="https://img.shields.io/badge/Cloudflare-915626?style=for-the-badge&logo=cloudflare&logoColor=white">
+  <img src="https://img.shields.io/badge/Git-915626?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-915626?style=for-the-badge&logo=github&logoColor=white">
+</p>
+
+### ⚙️ Estrutura do projeto
+
+```text
+DuoPlay-Retro/
+│
+├── public/              # Interface e arquivos do site
+│
+├── netlify/
+│   └── functions/       # Funções de backend
+│
+├── supabase/
+│   └── schema.sql       # Estrutura do banco de dados
+│
+├── docs/                # Documentação e integração
+│
+├── .env.example         # Exemplo de variáveis de ambiente
+├── netlify.toml         # Configurações do Netlify
+└── package.json         # Configurações do projeto
 ```
-public/                 site estático (Netlify publica só esta pasta)
-netlify/functions/      API (api.js), sem dependências
-supabase/schema.sql     banco: tabelas, RLS, funções, buckets
-docs/                   integração com o app (Codex) e checklists
-```
 
-## Publicar (ordem)
-1. **Supabase:** crie o projeto (região São Paulo, se disponível). SQL Editor: cole e rode `supabase/schema.sql`.
-2. **Supabase > Authentication:** *Confirm email* ligado; *Site URL* `https://duoplayretro.netlify.app`; *Redirect URLs* inclua `https://duoplayretro.netlify.app/conta.html`; tamanho mínimo de senha 10; MFA (TOTP) ligado. **E-mails:** configure um SMTP próprio (por exemplo Resend, Brevo ou outro). Pelo que sei, o envio padrão do Supabase só serve para testes e não entrega para qualquer pessoa. Confirme na documentação dele.
-3. **Cloudflare Turnstile:** crie um site, coloque a chave pública em `public/config.js` (`turnstileSiteKey`) e guarde a secreta.
-4. **Netlify:** suba esta pasta num repositório do GitHub e conecte ao Netlify (as funções só funcionam assim ou pela CLI, não por arrastar arquivos). Em *Environment variables* cadastre o que está em `.env.example` (`APP_ENCRYPTION_KEY`: `openssl rand -base64 32`).
-5. **Teste:** crie uma conta, confirme o e-mail, entre, ative o 2FA, adicione um amigo (use duas contas), cadastre-se na Beta e vincule o app (`docs/INTEGRACAO_APP_CODEX.md`).
+### 🎯 Objetivos de aprendizado
 
-## Para mudar o que aparece no site
-Tudo em `public/config.js`: planos, preços, FAQ, status, atualizações, Pix, foto da equipe, Google Analytics, links. As regras da Beta (vagas e limite diário) ficam no banco, na tabela `beta_config`.
+Durante o desenvolvimento deste projeto, busco aprofundar conhecimentos em:
 
-## Escala (muitos acessos)
-Páginas estáticas ficam no CDN do Netlify. O banco só recebe login, perfil, amizades e uso. Antes do lançamento: use o plano Pro do Supabase, o *pooler* de conexões, teste de carga (k6 ou Artillery), alertas e backup testado. Se o rate limit pelo banco virar gargalo, troque `rl_hit` por Redis (Upstash).
+- Desenvolvimento Front-end e Back-end.
+- Integração de APIs e serviços externos.
+- Modelagem e gerenciamento de bancos de dados.
+- Autenticação e segurança de aplicações.
+- Organização e estruturação de projetos.
+- Deploy e hospedagem de aplicações web.
+- Experiência do usuário e responsividade.
+
+### 🌐 Acesse o projeto
+
+<p align="center">
+  <a href="https://duoplayretro.netlify.app/">
+    <img src="https://img.shields.io/badge/DUOPLAY_RETRO-915626?style=for-the-badge&logo=googlechrome&logoColor=white">
+  </a>
+</p>
+
+**Status:** Em desenvolvimento.
+
+**Finalidade:** Projeto independente de estudos e portfólio.
+
+---
+
+<p align="center">
+  <i>Ora et labora.</i>
+  <br>
+  <sub>Transformando ideias em projetos, um código de cada vez.</sub>
+</p>
