@@ -27,7 +27,7 @@ h2{margin:0 0 8px;font-size:1.3rem}h3{margin:18px 0 6px;font-size:1.05rem}p{marg
 .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}.btn[disabled]{opacity:.6;cursor:not-allowed}
 @media (hover:hover){.btn:hover:not([disabled]){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}.btn:active:not([disabled]){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}}
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}.tabs .btn[aria-pressed="true"]{background:var(--violet)}
-.f{display:grid;gap:14px}.f[hidden],[hidden]{display:none!important}.f label{display:grid;gap:6px;font-weight:700}
+.f{display:grid;gap:14px}.f[hidden],[hidden]{display:none!important}.f label{display:block;font-weight:700}.f label>input,.f label>textarea{display:block;margin-top:6px}
 input[type=text],input[type=email],input[type=password],input[type=tel],textarea{font:500 1rem "Bricolage Grotesque",system-ui,sans-serif;color:var(--ink);background:var(--paper);border:3px solid var(--ink);padding:10px 12px;width:100%;min-height:44px}
 textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-template-columns:none;gap:10px;align-items:flex-start;font-weight:500!important}.chk input{width:22px;height:22px;margin-top:2px;flex:none}
 .msg{margin-top:14px;min-height:1.5em;font-weight:700}.msg.err{color:#8A1C1C}
@@ -41,6 +41,13 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
 .bar{height:18px;border:3px solid var(--ink);background:var(--paper);margin:8px 0 14px}.bar div{height:100%;background:var(--violet)}
 .qr{max-width:200px;background:#fff;border:3px solid var(--ink);padding:8px;display:block}code{background:var(--soft);padding:2px 6px;border:2px solid var(--ink)}
 .danger{border-color:#8A1C1C}
+.media{display:grid;gap:18px;margin-top:8px}@media (min-width:700px){.media{grid-template-columns:auto 1fr;align-items:start}}
+.mcard{border:3px solid var(--ink);background:var(--paper);padding:14px;display:grid;gap:10px;align-content:start}
+.pv-av{width:96px;height:96px;border:3px solid var(--ink);background:var(--violet) center/cover no-repeat;display:grid;place-items:center;font-weight:800;font-size:2.2rem}
+.pv-bn{height:96px;min-width:200px;border:3px solid var(--ink);background:var(--soft) center/cover no-repeat}
+.up{position:relative;display:inline-flex;width:fit-content}.up input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0}
+.up:focus-within .btn{outline:4px solid var(--violet);outline-offset:3px}.mcard .msg{margin:0;min-height:1.4em}
+@media (max-width:520px){#tTabs{display:grid;grid-template-columns:repeat(3,1fr)}#tTabs .btn{justify-content:center;padding:10px 6px}#aTabs{display:grid;grid-template-columns:1fr 1fr}#aTabs .btn{justify-content:center}#aTabs .btn:last-child{grid-column:1/-1}.who{padding:0 14px 14px}.wrap{padding:0 14px 48px}.card{padding:16px}}
 </style>
 </head>
 <body>
@@ -117,11 +124,15 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
         <div><button class="btn v" type="submit">Salvar perfil</button></div>
       </form>
       <h3>Fotos</h3>
-      <div class="f">
-        <label>Foto de perfil<input type="file" id="upAv" accept="image/png,image/jpeg,image/webp"></label>
-        <label>Banner<input type="file" id="upBn" accept="image/png,image/jpeg,image/webp"></label>
-        <p class="mute">Formatos PNG, JPG ou WebP. As imagens são reduzidas antes do envio.</p>
+      <div class="media">
+        <div class="mcard"><b>Foto de perfil</b><div class="pv-av" id="pvAv" role="img" aria-label="Prévia da foto de perfil"></div>
+          <label class="up"><span class="btn v">Escolher foto</span><input type="file" id="upAv" accept="image/*" aria-label="Escolher foto de perfil"></label>
+          <p class="msg" id="upAvMsg" role="status" aria-live="polite"></p></div>
+        <div class="mcard"><b>Banner</b><div class="pv-bn" id="pvBn" role="img" aria-label="Prévia do banner"></div>
+          <label class="up"><span class="btn v">Escolher banner</span><input type="file" id="upBn" accept="image/*" aria-label="Escolher banner do perfil"></label>
+          <p class="msg" id="upBnMsg" role="status" aria-live="polite"></p></div>
       </div>
+      <p class="mute" style="margin-top:10px">PNG, JPG ou WebP. As imagens são ajustadas automaticamente antes do envio.</p>
       <p class="mute" style="margin-top:12px">E-mail: <span id="mMail"></span></p>
       <p class="msg" id="pMsg" role="status" aria-live="polite"></p>
     </div>
@@ -203,7 +214,7 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
     invalid_credentials: "E-mail ou senha incorretos, ou o e-mail ainda não foi confirmado.", rate_limited: "Muitas tentativas. Aguarde um pouco e tente de novo.",
     captcha: "Confirme que você não é um robô.", invalid_input: "Confira os campos e tente de novo.", terms_required: "Aceite os Termos de Uso e a Política de Privacidade.",
     mfa_invalid: "Código inválido ou expirado.", not_configured: "O servidor ainda não está configurado.", reset_failed: "Link de recuperação inválido ou expirado.",
-    invalid_image: "Imagem inválida ou grande demais.", unauthorized: "Sua sessão expirou. Entre de novo.", forbidden: "Ação bloqueada. Recarregue a página."
+    invalid_image: "Imagem inválida ou grande demais.", upload_failed: "O servidor não conseguiu salvar a imagem. Tente de novo em instantes.", unauthorized: "Sua sessão expirou. Entre de novo.", forbidden: "Ação bloqueada. Recarregue a página."
   };
   function say(el, text, bad) { el.textContent = text; el.className = "msg" + (bad ? " err" : ""); }
   async function api(path, method, body) {
@@ -248,7 +259,7 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
   submit($("#fMfa"), "", async function (f) { await api("/auth/mfa", "POST", { code: String(f.get("code")).trim() }); boot(); });
   submit($("#fSignup"), "signup", async function (f) {
     await api("/auth/signup", "POST", { email: f.get("email"), username: String(f.get("username")).toLowerCase(), password: f.get("password"), terms: f.get("terms") === "on", captcha: cap("signup") });
-    say($("#aMsg"), "Pronto! Se os dados estiverem corretos, enviamos um e-mail para confirmar seu endereço. Depois é só entrar.");
+    showAuth("login"); say($("#aMsg"), "Conta criada! Se pedirmos confirmação, confira seu e-mail. Depois é só entrar com seu e-mail e senha.");
   });
   submit($("#fForgot"), "forgot", async function (f) {
     await api("/auth/forgot", "POST", { email: f.get("email"), captcha: cap("forgot") });
@@ -280,6 +291,7 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
     me = d.me;
     $("#mName").textContent = me.display_name; $("#mTag").textContent = me.username + "#" + me.tag;
     avatarBox($("#mAv"), me); $("#mBanner").style.backgroundImage = me.banner ? 'url("' + me.banner + '")' : "";
+    avatarBox($("#pvAv"), me); $("#pvBn").style.backgroundImage = me.banner ? 'url("' + me.banner + '")' : "";
     var f = $("#fProf"); f.display_name.value = me.display_name; f.bio.value = me.bio; f.phone.value = me.phone; f.show_activity.checked = me.show_activity;
     $("#mMail").textContent = me.email;
     $("#sTxt").textContent = me.two_factor ? "Ativada. Ao entrar, será pedido o código do aplicativo autenticador." : "Desativada. Recomendamos ativar para proteger sua conta.";
@@ -317,15 +329,20 @@ textarea{min-height:100px;resize:vertical}.chk{display:flex!important;grid-templ
       img.onerror = function () { URL.revokeObjectURL(url); no(new Error("img")); }; img.src = url;
     });
   }
-  function upload(input, path, w, hgt) {
+  function upload(input, path, w, hgt, out) {
     input.addEventListener("change", async function () {
       var f = input.files[0]; if (!f) return;
-      if (!/^image\/(png|jpeg|webp)$/.test(f.type) || f.size > 15e6) { say($("#pMsg"), ERR.invalid_image, true); return; }
-      try { await api(path, "POST", { image: await resize(f, w, hgt) }); paint(await api("/me")); say($("#pMsg"), "Imagem atualizada."); }
-      catch (e) { say($("#pMsg"), msgOf(e), true); } input.value = "";
+      if (f.size > 25e6) { say(out, "Imagem muito grande (máximo 25 MB).", true); input.value = ""; return; }
+      say(out, "Enviando…"); input.disabled = true;
+      try {
+        await api(path, "POST", { image: await resize(f, w, hgt) });
+        paint(await api("/me")); say(out, "Pronto! Imagem atualizada.");
+      } catch (e) {
+        say(out, e.message === "img" ? "Não consegui ler essa imagem. Use PNG, JPG ou WebP." : (ERR[e.code] || "Não foi possível enviar (" + (e.status || "sem conexão") + (e.code ? " · " + e.code : "") + ")."), true);
+      } finally { input.disabled = false; input.value = ""; }
     });
   }
-  upload($("#upAv"), "/me/avatar", 256, 256); upload($("#upBn"), "/me/banner", 1200, 400);
+  upload($("#upAv"), "/me/avatar", 256, 256, $("#upAvMsg")); upload($("#upBn"), "/me/banner", 1200, 400, $("#upBnMsg"));
 
   /* ---- amigos ---- */
   function person(p, buttons) {

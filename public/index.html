@@ -64,7 +64,7 @@ h2{font-weight:800;font-stretch:75%;font-size:clamp(2rem,6vw,4rem);line-height:1
 .demo{overflow:hidden}
 .bar{display:flex;gap:10px;align-items:center;padding:8px 12px;background:var(--soft);border-bottom:3px solid var(--ink);font-weight:700}
 .bar i{width:14px;height:14px;border:3px solid var(--ink);background:var(--violet)}.bar i+i{background:var(--blue)}
-#pong{display:block;width:100%;height:auto;background:var(--paper)}
+#pong{display:block;width:100%;height:auto;background:var(--paper);touch-action:none}
 .ctl{display:flex;gap:14px;align-items:center;padding:12px;border-top:3px solid var(--ink)}
 .prog{flex:1;height:16px;border:3px solid var(--ink);background:var(--paper)}.prog div{height:100%;width:0;background:var(--violet)}
 .pads{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
@@ -113,7 +113,7 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
 .cond li,.dl2 dd,.box p,.box li,.plan p,.plan li,.fine,details p,summary,.status,.discord p,.lead,.sub,td,.tag{overflow-wrap:anywhere}
 .two>*,.comm>*,.plans>*,.heroGrid>*,.facts>*,.steps>*{min-width:0}
 @media (max-width:520px){.dl2{grid-template-columns:1fr;gap:2px}.dl2 dd{margin-bottom:8px}.top nav{gap:2px 10px}.box,.form,.discord,.step,.fact,.plan{padding:18px}.actions .btn{width:100%}}
-.btn.sm{padding:6px 12px;min-height:36px}.dl .nt{color:var(--on)}.dl .lst{max-width:36em;margin-bottom:16px}
+[hidden]{display:none!important}.btn.sm{padding:6px 12px;min-height:36px}.dl .nt{color:var(--on)}.dl .lst{max-width:36em;margin-bottom:16px}
 .tphoto{width:120px;height:120px;border:3px solid var(--ink);object-fit:cover;display:block;margin:8px 0}.tph{background:var(--violet);display:grid;place-items:center;font-weight:800;font-size:3rem}
 .consent{position:fixed;left:12px;right:12px;bottom:12px;max-width:520px;padding:16px;z-index:60;display:grid;gap:10px}
 .sticky-cta{display:none}@media (max-width:760px){.sticky-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:50;justify-content:center}body{padding-bottom:84px}}
@@ -167,7 +167,7 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
 
 <section id="demo"><div class="wrap">
   <h2 data-split>Teste os controles</h2>
-  <p class="sub">Prévia interativa do que a TV vai exibir. Jogador 1: W e S. Jogador 2: setas. No celular, use os botões abaixo.</p>
+  <p class="sub">Prévia interativa do que a TV vai exibir. Jogador 1: W e S. Jogador 2: setas. No celular, arraste o dedo no jogo (lado esquerdo e direito) ou use os botões abaixo.</p>
   <div class="brut demo pop">
     <div class="bar"><i></i><i></i><span>demo_pong.mp4</span></div>
     <canvas id="pong" width="640" height="360" tabindex="0" aria-label="Demo de Pong para dois jogadores"></canvas>
@@ -323,6 +323,14 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
     var el = $("#betaCount"); if (!el) return;
     fetch("/api/beta", { credentials: "same-origin" }).then(function (r) { return r.json(); }).then(function (d) {
       el.textContent = Number(d.beta.taken).toLocaleString("pt-BR") + " de " + Number(d.beta.total).toLocaleString("pt-BR") + " vagas preenchidas.";
+      if (d.logged) {
+        $$("a.nl").forEach(function (a) { if (a.getAttribute("href") === "conta.html") a.textContent = "Minha conta"; });
+        var second = $("#beta .btn[href='conta.html']"); if (second) second.textContent = "Acessar minha conta";
+        if (d.beta.joined) {
+          $$("a.btn[href='conta.html#beta']").forEach(function (a) { a.textContent = "Acessar minha conta"; a.setAttribute("href", "conta.html"); });
+          if (second) second.hidden = true;
+        }
+      }
     }).catch(function () { el.textContent = "Vagas: " + SITE.beta.slots.toLocaleString("pt-BR") + "."; });
   })();
 
@@ -388,8 +396,18 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
   setRun(run);
   $("#play").addEventListener("click", function () { setRun(!run); });
   var KM = { w: "w", s: "s", ArrowUp: "u", ArrowDown: "d" };
-  cv.addEventListener("keydown", function (e) { var k = KM[e.key]; if (k) { keys[k] = 1; e.preventDefault(); } });
-  cv.addEventListener("keyup", function (e) { var k = KM[e.key]; if (k) keys[k] = 0; });
+  var inDemo = !window.IntersectionObserver;
+  if (!inDemo) new IntersectionObserver(function (en) { inDemo = en[0].isIntersecting; }, { threshold: 0.35 }).observe(cv);
+  var typing = function (e) { var t = e.target && e.target.tagName; return t === "INPUT" || t === "TEXTAREA" || t === "SELECT"; };
+  var keyOf = function (e) { return KM[e.key && e.key.length === 1 ? e.key.toLowerCase() : e.key]; };
+  addEventListener("keydown", function (e) { var k = keyOf(e); if (k && inDemo && !typing(e)) { keys[k] = 1; e.preventDefault(); } });
+  addEventListener("keyup", function (e) { var k = keyOf(e); if (k) keys[k] = 0; });
+  function dragPad(e) {                                   // arrastar no jogo: metade esquerda = Jogador 1, direita = Jogador 2
+    if (e.pointerType === "mouse" && !e.buttons) return;
+    var r = cv.getBoundingClientRect(), i = (e.clientX - r.left) / r.width < 0.5 ? 0 : 1;
+    P[i] = clamp((e.clientY - r.top) / r.height * H - 32, 0, H - 64); act[i] = performance.now();
+  }
+  cv.addEventListener("pointerdown", dragPad); cv.addEventListener("pointermove", dragPad);
   $$(".pad [data-k]").forEach(function (b) {
     var k = b.dataset.k;
     b.addEventListener("pointerdown", function (e) { e.preventDefault(); keys[k] = 1; });
@@ -480,15 +498,15 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
     var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
     var lst = function (a) { return '<ul class="lst">' + a.map(function (i) { return "<li>" + esc(i) + "</li>"; }).join("") + "</ul>"; };
     $("#cond").innerHTML = SITE.billing.map(function (b) { return "<li><b>" + esc(b[0]) + ":</b> " + (b[2] ? '<a href="' + esc(b[2]) + '">' + esc(b[1]) + "</a>" : esc(b[1])) + "</li>"; }).join("");
-    var C = SITE.compat;
-    $("#req").innerHTML = [["Requisitos mínimos", C.min], ["Recomendados", C.rec], ["Sistemas suportados", C.systems], ["Limitações conhecidas", C.limits.length ? C.limits.join("; ") : "Nenhuma informada até o momento."]].map(function (r) { return "<dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("");
-    $("#devs").innerHTML = C.devices.length ? '<div class="tw"><table><thead><tr><th>Dispositivo</th><th>Processador</th><th>Android</th><th>Resultado</th><th>Observações</th></tr></thead><tbody>' + C.devices.map(function (d) { return "<tr><td>" + esc(d.model) + "</td><td>" + esc(d.cpu) + "</td><td>" + esc(d.android) + "</td><td>" + esc(C.levels.indexOf(d.level) > -1 ? d.level : "Não testado") + "</td><td>" + esc(d.notes) + "</td></tr>"; }).join("") + "</tbody></table></div>" : "<p>Ainda não há resultados publicados. Classificações: " + C.levels.join(", ") + ".</p>";
+    var CP = SITE.compat;
+    $("#req").innerHTML = [["Requisitos mínimos", CP.min], ["Recomendados", CP.rec], ["Sistemas suportados", CP.systems], ["Limitações conhecidas", CP.limits.length ? CP.limits.join("; ") : "Nenhuma informada até o momento."]].map(function (r) { return "<dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("");
+    $("#devs").innerHTML = CP.devices.length ? '<div class="tw"><table><thead><tr><th>Dispositivo</th><th>Processador</th><th>Android</th><th>Resultado</th><th>Observações</th></tr></thead><tbody>' + CP.devices.map(function (d) { return "<tr><td>" + esc(d.model) + "</td><td>" + esc(d.cpu) + "</td><td>" + esc(d.android) + "</td><td>" + esc(CP.levels.indexOf(d.level) > -1 ? d.level : "Não testado") + "</td><td>" + esc(d.notes) + "</td></tr>"; }).join("") + "</tbody></table></div>" : "<p>Ainda não há resultados publicados. Classificações: " + CP.levels.join(", ") + ".</p>";
     $("#log").innerHTML = SITE.changelog.map(function (r) {
       var parts = [["Melhorias", r.improvements], ["Correções", r.fixes], ["Compatibilidade", r.compat], ["Problemas conhecidos", r.issues]].filter(function (x) { return x[1] && x[1].length; });
       return '<article class="brut box pop"><h3>' + esc(r.name) + '</h3><p class="nt">' + esc(r.date || "Data de lançamento a definir") + "</p>" + parts.map(function (x) { return "<h4>" + x[0] + "</h4>" + lst(x[1]); }).join("") + (r.note ? '<p class="nt">' + esc(r.note) + "</p>" : "") + "</article>";
     }).join("");
-    var S = SITE.status, SL = { operacional: "Operacional", instabilidade: "Instabilidade", indisponibilidade: "Indisponibilidade", manutencao: "Manutenção programada" };
-    $("#stat").innerHTML = '<span class="st st-' + esc(S.state) + '">' + esc(SL[S.state] || "Não informado") + "</span><p>" + esc(S.message) + '</p><p class="nt">Última atualização: ' + esc(S.updated || "a definir") + ". Informado manualmente pela equipe, sem monitoramento automático.</p>" + (S.incidents.length ? "<h4>Histórico de incidentes</h4>" + lst(S.incidents.map(function (i) { return i.date + ": " + i.text; })) : "<p>Nenhum incidente registrado.</p>");
+    var ST = SITE.status, SL = { operacional: "Operacional", instabilidade: "Instabilidade", indisponibilidade: "Indisponibilidade", manutencao: "Manutenção programada" };
+    $("#stat").innerHTML = '<span class="st st-' + esc(ST.state) + '">' + esc(SL[ST.state] || "Não informado") + "</span><p>" + esc(ST.message) + '</p><p class="nt">Última atualização: ' + esc(ST.updated || "a definir") + ". Informado manualmente pela equipe, sem monitoramento automático.</p>" + (ST.incidents.length ? "<h4>Histórico de incidentes</h4>" + lst(ST.incidents.map(function (i) { return i.date + ": " + i.text; })) : "<p>Nenhum incidente registrado.</p>");
     var fcat = "Todas", det = function (x) { return "<details><summary>" + esc(x.q) + "</summary><p>" + esc(x.a) + "</p></details>"; };
     var fr = function () {
       var l = SITE.faq.filter(function (x) { return fcat === "Todas" || x.cat === fcat; });
@@ -513,8 +531,8 @@ details{border:3px solid var(--ink);background:var(--paper);padding:10px 16px;ma
       post(ct, st, function () {});
     });
     $("#caseList").innerHTML = SITE.cases.length ? SITE.cases.map(function (c) { return '<article class="brut box pop"><h3>' + esc(c.title) + "</h3><p>" + esc(c.text) + '</p><p class="nt">' + esc(c.author) + "</p></article>"; }).join("") : '<div class="brut box pop"><p>Os primeiros cases, com relatos reais de quem testou, serão publicados aqui depois da Beta.</p></div>';
-    var T = SITE.team;
-    $("#team").innerHTML = "<h3>" + esc(T.name) + "</h3>" + (T.photo ? '<img class="tphoto" src="' + esc(T.photo) + '" alt="Foto de ' + esc(T.name) + ', responsável pelo DuoPlay" width="120" height="120">' : '<div class="tphoto tph" role="img" aria-label="Foto da equipe em breve">' + esc(T.name.charAt(0).toUpperCase()) + "</div>") + "<p>" + esc(T.bio) + "</p>";
+    var TM = SITE.team;
+    $("#team").innerHTML = "<h3>" + esc(TM.name) + "</h3>" + (TM.photo ? '<img class="tphoto" src="' + esc(TM.photo) + '" alt="Foto de ' + esc(TM.name) + ', responsável pelo DuoPlay" width="120" height="120">' : '<div class="tphoto tph" role="img" aria-label="Foto da equipe em breve">' + esc(TM.name.charAt(0).toUpperCase()) + "</div>") + "<p>" + esc(TM.bio) + "</p>";
     $("#donate").innerHTML = "<h3>Ajude o projeto</h3><p>O DuoPlay é independente. Se quiser ajudar, você pode fazer uma doação voluntária por Pix. A doação não é compra, não dá vantagens e não garante recursos.</p><p>" + (SITE.pix ? '<button class="btn v" type="button" id="pixCopy">Copiar chave Pix</button>' : '<button class="btn v" type="button" disabled aria-disabled="true">Doação por Pix em breve</button>') + '</p><p class="nt" id="pixMsg" role="status" aria-live="polite"></p>';
     if (SITE.pix) $("#pixCopy").addEventListener("click", function () { navigator.clipboard.writeText(SITE.pix).then(function () { $("#pixMsg").textContent = "Chave copiada."; }, function () { $("#pixMsg").textContent = "Não foi possível copiar. Chave: " + SITE.pix; }); });
     var ld = document.createElement("script"); ld.type = "application/ld+json";
