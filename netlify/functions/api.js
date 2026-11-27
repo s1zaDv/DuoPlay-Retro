@@ -189,11 +189,11 @@ async function webRoutes(ev, m, path, b, ip) {
 
   /* ---- a partir daqui, precisa estar logado ---- */
   const s = await session(ev);
-  if (route === "GET /beta" && !s) { const r = await rpc("beta_status", { p_uid: null }); return res(200, { beta: r.data }); }
+  if (route === "GET /beta" && !s) { const r = await rpc("beta_status", { p_uid: null }); return res(200, { beta: r.data, logged: false }); }
   if (!s) return fail(401, "unauthorized");
   const ok = (data) => res(200, data, s.set);
 
-  if (route === "GET /beta") return ok({ beta: (await rpc("beta_status", { p_uid: s.id })).data });
+  if (route === "GET /beta") return ok({ beta: (await rpc("beta_status", { p_uid: s.id })).data, logged: true });
 
   if (route === "GET /me") {
     const p = await db(`/profiles?id=eq.${s.id}&select=username,tag,display_name,bio,avatar_path,banner_path,show_activity,phone_enc,created_at`);
@@ -218,8 +218,10 @@ async function webRoutes(ev, m, path, b, ip) {
     if (await limited("up:" + s.id, 10, 3600)) return fail(429, "rate_limited");
     const img = imageBuf(b.image, k[1]); if (!img) return fail(400, "invalid_image");
     const p = `${s.id}/${rand(12)}.${img.ext}`;
-    const up = await fetch(`${SB}/storage/v1/object/${k[0]}/${p}`, { method: "POST", headers: { apikey: SVC, Authorization: "Bearer " + SVC, "Content-Type": img.type, "x-upsert": "true" }, body: img.buf });
-    if (!up.ok) return fail(502, "upload_failed");
+    const upUrl = `${SB}/storage/v1/object/${k[0]}/${p}`;
+    let up = await fetch(upUrl, { method: "POST", headers: { apikey: SVC, Authorization: "Bearer " + SVC, "Content-Type": img.type, "x-upsert": "true" }, body: img.buf });
+    if (!up.ok && (up.status === 401 || up.status === 403)) up = await fetch(upUrl, { method: "POST", headers: { apikey: SVC, "Content-Type": img.type, "x-upsert": "true" }, body: img.buf });   // chaves novas (sb_secret_) não são JWT
+    if (!up.ok) { console.error("upload_failed", up.status, String(await up.text()).slice(0, 200)); return fail(502, "upload_failed"); }
     const prev = await db(`/profiles?id=eq.${s.id}&select=${k[2]}`);
     const old = prev.ok && prev.data && prev.data[0] && prev.data[0][k[2]];
     await db(`/profiles?id=eq.${s.id}`, { method: "PATCH", body: { [k[2]]: p } });
